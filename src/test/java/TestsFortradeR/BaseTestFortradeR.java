@@ -1,17 +1,17 @@
-package Tests;
+package TestsFortradeR;
 
 import Selenium_Core.DriverManager;
 import Selenium_Core.DriverManagerFactory;
 import org.openqa.selenium.WebDriver;
 
-public class BaseTest {
+public class BaseTestFortradeR {
     WebDriver driver;
     DriverManager driverManager;
 
     public void baseSetup(String browser, String version) {
         driverManager = DriverManagerFactory.getDriverManager(browser);
         driver = driverManager.getWebDriver(version);
-        driver.get("");
+        driver.get("https://www.fortrader.com/minilps/en/education/");
     }
 
     public void baseTearDown() {
