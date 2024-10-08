@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit;
 public class OperaDriverManager extends DriverManager{
     @Override
     public void createWebDriver(String version) {
-        System.setProperty("webdriver.opera.driver","C:\\Users\\Ivan Popovic\\Desktop\\Documentation\\Automation Practice" +
-                "\\LandingPages-Regular\\src\\main\\resources\\operadriver"+version+".exe");
+        System.setProperty("webdriver.opera.driver","src/main/resources/operadriver" + version + ".exe");
         OperaOptions options = new OperaOptions();
+        options.setBinary("C:\\Users\\newUser\\AppData\\Local\\Programs\\Opera\\opera.exe");
         driver = new OperaDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

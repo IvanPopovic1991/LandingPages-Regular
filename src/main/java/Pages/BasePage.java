@@ -34,11 +34,11 @@ public class BasePage {
 
             Actions actions = new Actions(driver);
             actions.moveToElement(element).click().build().perform();
-            System.out.println("Clicked " + element);
+            System.out.println("Clicked " + log);
         } catch (StaleElementReferenceException e) {
             Actions actions = new Actions(driver);
             actions.moveToElement(element).click().build().perform();
-            System.out.println("Clicked " + element);
+            System.out.println("Clicked " + log);
         }
     }
 
@@ -48,11 +48,11 @@ public class BasePage {
             wait.until(ExpectedConditions.visibilityOf(element));
             element.clear();
             element.sendKeys(text);
-            System.out.println("Typed " + text + " into" + log + " field");
+            System.out.println("Typed " + text + " into " + log + " field");
         } catch (StaleElementReferenceException e) {
             element.clear();
             element.sendKeys(text);
-            System.out.println("Typed " + text + " into" + log + " field");
+            System.out.println("Typed " + text + " into " + log + " field");
         }
     }
 
@@ -97,11 +97,11 @@ public class BasePage {
 
             driver.findElement(by).clear();
             driver.findElement(by).sendKeys(text);
-            System.out.println("Typed " + text + " into" + log + " field");
+            System.out.println("Typed " + text + " into " + log + " field");
         } catch (StaleElementReferenceException e) {
             driver.findElement(by).clear();
             driver.findElement(by).sendKeys(text);
-            System.out.println("Typed " + text + " into" + log + " field");
+            System.out.println("Typed " + text + " into " + log + " field");
         }
     }
 
