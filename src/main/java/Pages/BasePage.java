@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class BasePage {
     WebDriver driver;
-    int waitTime = 10;
+    int waitTime = 15;
 
     /**
      * PageFactory- koristi se za direktno kreiranje web elemenata. Omogucava nam da sacuvamo veb element bez koricenja
@@ -121,5 +121,4 @@ public class BasePage {
          */
         FileUtils.copyFile(file, new File("src/screenshot/" + fileName + ".jpg"));
     }
-
 }

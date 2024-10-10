@@ -45,7 +45,7 @@ public class FortradeRPage extends BasePage {
     }
 
     public void clickOnSubmitButton() {
-        clickElement(submitButton, "login button");
+        clickElement(submitButton, "get started button");
     }
 
     public void successfullyRegistration(String firstNameData, String lastNameData, String emailData, String countryCodeData, String phoneNumberData) {
