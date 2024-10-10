@@ -1,0 +1,22 @@
+# Default ignored files
+/shelf/
+target
+target/classes
+target/generated-sources
+target/generated-test-sources
+target/test-classes
+!.mvn/wrapper/maven-wrapper.jar
+logs/
+*.log
+### IntelliJ IDEA ###
+.idea
+.idea/modules.
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+.idea/encodings.xml
+.idea/misc.xml
+.idea/workspace.xml
+*.iws
+*.iml
+*.ipr

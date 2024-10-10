@@ -13,8 +13,9 @@ public class OperaDriverManager extends DriverManager{
     @Override
     public void createWebDriver(String version) {
         System.setProperty("webdriver.opera.driver","src/main/resources/operadriver" + version + ".exe");
+        String filePath = System.getenv("OperaExeFilePath");
         OperaOptions options = new OperaOptions();
-        options.setBinary("C:\\Users\\newUser\\AppData\\Local\\Programs\\Opera\\opera.exe");
+        options.setBinary(filePath);
         driver = new OperaDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
