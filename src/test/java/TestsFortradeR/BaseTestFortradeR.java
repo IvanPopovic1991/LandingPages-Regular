@@ -1,8 +1,13 @@
 package TestsFortradeR;
 
+import Pages.BasePage;
 import Selenium_Core.DriverManager;
 import Selenium_Core.DriverManagerFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.awt.*;
+import java.io.IOException;
 
 public class BaseTestFortradeR {
     WebDriver driver;
@@ -14,7 +19,8 @@ public class BaseTestFortradeR {
         driver.get("https://www.fortrader.com/minilps/en/education/");
     }
 
-    public void baseTearDown() {
+    public void baseTearDown(String fileName) throws IOException, AWTException {
+        new BasePage(driver).takeScreenshot(fileName,driver.findElement(By.xpath("//div[@id='startTradingButton']")));
         driverManager.quitDriver();
     }
 }

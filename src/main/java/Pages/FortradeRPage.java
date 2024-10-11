@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class FortradeRPage extends BasePage {
     public FortradeRPage(WebDriver driver) {
@@ -55,5 +58,10 @@ public class FortradeRPage extends BasePage {
         enterCountryCode(countryCodeData);
         enterPhoneNumber(phoneNumberData);
         clickOnSubmitButton();
+    }
+    public void assertURL(String url){
+        WebDriverWait wait = new WebDriverWait(driver,waitTime);
+        wait.until(ExpectedConditions.urlContains(url));
+        Assert.assertEquals(driver.getCurrentUrl(),url);
     }
 }
