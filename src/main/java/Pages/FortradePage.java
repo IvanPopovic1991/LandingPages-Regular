@@ -8,6 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.awt.*;
+import java.io.IOException;
+
 public class FortradePage extends BasePage{
 
     public FortradePage(WebDriver driver) {
@@ -35,6 +38,15 @@ public class FortradePage extends BasePage{
 
         @FindBy(xpath = "//button[@id='CybotCookiebotDialogBodyButtonDecline']")
         WebElement denyBtn;
+
+        @FindBy (xpath = "//div[@id='startTradingButton']")
+        WebElement continueBtn;
+
+        @FindBy (xpath = "//div[@data-cmd='menu']")
+        WebElement menuBtn;
+
+        @FindBy (xpath = "//div[@id='platformRegulation']")
+        WebElement regulationMsg;
 
         public void enterFirstName(String firstNameData) {
             typeText(firstName, firstNameData, "fist name");
@@ -77,5 +89,40 @@ public class FortradePage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver,waitTime);
         wait.until(ExpectedConditions.urlContains(url));
         Assert.assertEquals(driver.getCurrentUrl(),url);
+    }
+    public void clickContinueBtn(){
+            clickElement(continueBtn,"continue button");
+    }
+    public void clickMenuBtn(){
+            clickElement(menuBtn,"menu button");
+    }
+    public void checkRegulation(String regulation) throws IOException, AWTException {
+            String actualText = getText(regulationMsg, "regulation text");
+            clickDenyBtn();
+            switch (regulation){
+                case "FCA" : {
+                    Assert.assertEquals(actualText,"Broker: Fortrade Ltd. (FCA)");
+                    new BasePage(driver).takeScreenshot("Broker Fortrade Ltd FCA - successfully registered demo account",regulationMsg);
+                }
+                break;
+                case "cyses" : {
+                    Assert.assertEquals(actualText,"Broker: Fortrade Cyprus Ltd. (CySec)");
+                    new BasePage(driver).takeScreenshot("Broker Fortrade Cyprus Ltd CySec - successfully registered demo account", regulationMsg);
+                }
+                break;
+                case "Asic" : {
+                    Assert.assertEquals(actualText,"Broker: Fort Securities Australia Pty Ltd. (ASIC)");
+                    new BasePage(driver).takeScreenshot("Broker Fort Securities Australia Pty Ltd ASIC - successfully registered demo account",regulationMsg);
+                }break;
+                case "iiroc" : {
+                    Assert.assertEquals(actualText,"Broker: Fortrade Canada Limited (CIRO)");
+                    new BasePage(driver).takeScreenshot("Broker Fortrade Canada Limited CIRO - successfully registered demo account",regulationMsg);
+                }break;
+                case "FSC" :
+                default: {
+                    Assert.assertEquals(actualText,"Broker: Fortrade (Mauritius) Ltd (FSC)");
+                    new BasePage(driver).takeScreenshot("Broker Fortrade Mauritius Ltd FSC - successfully registered demo account",regulationMsg);
+                }break;
+            }
     }
 }
