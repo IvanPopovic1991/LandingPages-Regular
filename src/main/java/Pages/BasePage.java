@@ -1,9 +1,9 @@
 package Pages;
 
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.*;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,7 +20,7 @@ import java.time.Duration;
 
 public class BasePage {
     WebDriver driver;
-    int waitTime = 15;
+    int waitTime = 20;
 
     /**
      * PageFactory- koristi se za direktno kreiranje web elemenata. Omogucava nam da sacuvamo veb element bez koricenja
@@ -127,6 +127,7 @@ public class BasePage {
 //         */
 //        FileUtils.copyFile(file, new File("src/screenshot/" + fileName + ".jpg"));
 //    }
+
     /**
      * takeScreenShot - new method for taking full screenshot
      */
@@ -147,5 +148,19 @@ public class BasePage {
 
         // Saving the full screen image
         ImageIO.write(screenFullImage, "PNG", new File("src/screenshot/" + fileName + ".png"));
+    }
+
+    public String getText(WebElement element, String log) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOf(element));
+
+            System.out.println("Get text from " + log + " element");
+            return element.getText();
+        } catch (StaleElementReferenceException e) {
+
+            System.out.println("Get text from " + log + " element");
+            return element.getText();
+        }
     }
 }
