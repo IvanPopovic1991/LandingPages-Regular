@@ -20,7 +20,7 @@ import java.time.Duration;
 
 public class BasePage {
     WebDriver driver;
-    int waitTime = 20;
+    int waitTime = 15;
 
     /**
      * PageFactory- koristi se za direktno kreiranje web elemenata. Omogucava nam da sacuvamo veb element bez koricenja
@@ -36,6 +36,22 @@ public class BasePage {
     public void clickElement(WebElement element, String log) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element).click().build().perform();
+            System.out.println("Clicked " + log);
+        } catch (StaleElementReferenceException e) {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element).click().build().perform();
+            System.out.println("Clicked " + log);
+        }
+    }
+    public void clickElement(WebElement invisibleElement, WebElement element, String log) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.invisibilityOf(invisibleElement));
             wait.until(ExpectedConditions.visibilityOf(element));
             wait.until(ExpectedConditions.elementToBeClickable(element));
 
@@ -109,6 +125,30 @@ public class BasePage {
             driver.findElement(by).clear();
             driver.findElement(by).sendKeys(text);
             System.out.println("Typed " + text + " into " + log + " field");
+        }
+    }
+    public String getTextBy(By by, String log){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+
+            System.out.println("Got text from " + log + " element.");
+            return driver.findElement(by).getText();
+        } catch (StaleElementReferenceException e) {
+            System.out.println("Got text from " + log + " element.");
+            return driver.findElement(by).getText();
+        }
+    }
+    public String getTextBy(WebElement element, String log){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOf(element));
+
+            System.out.println("Got text from " + log + " element.");
+            return element.getText();
+        } catch (StaleElementReferenceException e) {
+            System.out.println("Got text from " + log + " element.");
+            return element.getText();
         }
     }
 //    /**

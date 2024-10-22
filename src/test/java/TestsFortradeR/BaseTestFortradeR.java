@@ -19,8 +19,7 @@ public class BaseTestFortradeR {
         driver.get("https://www.fortrader.com/minilps/en/education/");
     }
 
-    public void baseTearDown(String fileName) throws IOException, AWTException {
-        new BasePage(driver).takeScreenshot(fileName,driver.findElement(By.xpath("//div[@id='startTradingButton']")));
+    public void baseTearDown(){
         driverManager.quitDriver();
     }
 }

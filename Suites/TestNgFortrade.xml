@@ -2,40 +2,59 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Fortrade Pages">
     <test name="Demo Account Registration - FSC Regulation">
+        <parameter name="countryCode" value="381"/>
+        <parameter name="regulation" value="FSC"/>
         <classes>
-            <class name="TestsFortrade.EducationLp"/>
-            <parameter name="countryCode" value="381"/>
-            <parameter name="regulation" value="FSC"/>
+            <class name="TestsFortrade.EducationLp">
+                <methods>
+                    <include name="alreadyRegisteredAccountTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="Demo Account Registration - FCA Regulation">
+        <parameter name="countryCode" value="44"/>
+        <parameter name="regulation" value="FCA"/>
         <classes>
-            <class name="TestsFortrade.EducationLp"/>
-            <parameter name="countryCode" value="44"/>
-            <parameter name="regulation" value="FCA"/>
+            <class name="TestsFortrade.EducationLp">
+                <methods>
+                    <include name="alreadyRegisteredAccountTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="Demo Account Registration - Asic Regulation">
+        <parameter name="countryCode" value="61"/>
+        <parameter name="regulation" value="Asic"/>
         <classes>
-            <class name="TestsFortrade.EducationLp"/>
-            <parameter name="countryCode" value="61"/>
-            <parameter name="regulation" value="Asic"/>
+            <class name="TestsFortrade.EducationLp">
+                <methods>
+                    <include name="alreadyRegisteredAccountTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="Demo Account Registration - Iiroc Regulation">
+        <parameter name="countryCode" value="1"/>
+        <parameter name="regulation" value="iiroc"/>
         <classes>
-            <class name="TestsFortrade.EducationLp"/>
-            <parameter name="countryCode" value="1"/>
-            <parameter name="regulation" value="iiroc"/>
+            <class name="TestsFortrade.EducationLp">
+                <methods>
+                    <include name="alreadyRegisteredAccountTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
-<!-- Currently restricted -->
-<!--<test name="Demo Account Registration - Cysec Regulation">-->
-<!--    <classes>-->
-<!--        <class name="TestsFortrade.EducationLp">-->
-<!--        <parameter name="countryCode" value="357"/>-->
-<!--        <parameter name="regulation" value="cysec"/>-->
-<!--        </class>-->
-<!--    </classes> -->
-<!--</test>-->
+    <!-- Currently restricted -->
+    <!--<test name="Demo Account Registration - Cysec Regulation">
+        <parameter name="countryCode" value="357"/>
+        <parameter name="regulation" value="cysec"/>
+        <classes>
+            <class name="TestsFortrade.EducationLp">
+                <methods>
+                    <include name="alreadyRegisteredAccountTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>-->
 </suite>
