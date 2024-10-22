@@ -3,7 +3,11 @@
 <suite name="FortradeR Pages">
     <test name="Demo Account Registration">
         <classes>
-           <class name="TestsFortradeR.EducationLp"/>
+            <class name="TestsFortradeR.EducationLp">
+                <methods>
+                    <include name="alreadyRegisteredAccountTest"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

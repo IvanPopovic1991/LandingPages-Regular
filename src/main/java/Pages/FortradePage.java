@@ -11,118 +11,161 @@ import org.testng.Assert;
 import java.awt.*;
 import java.io.IOException;
 
-public class FortradePage extends BasePage{
+public class FortradePage extends BasePage {
 
     public FortradePage(WebDriver driver) {
-            super(driver);
-            PageFactory.initElements(driver, this);
-        }
+        super(driver);
+        PageFactory.initElements(driver, this);
+    }
 
-        @FindBy(xpath = "//input[@name='FirstName']")
-        WebElement firstName;
+    @FindBy(xpath = "//input[@name='FirstName']")
+    WebElement firstName;
 
-        @FindBy(xpath = "//input[@name='LastName']")
-        WebElement lastName;
+    @FindBy(xpath = "//input[@name='LastName']")
+    WebElement lastName;
 
-        @FindBy(xpath = "(//div[@class='LcWidgetTopWrapper ClField-Email lcFieldWrapper']//input[@name='Email'])[position()=2]")
-        WebElement email;
+    @FindBy(xpath = "(//div[@class='LcWidgetTopWrapper ClField-Email lcFieldWrapper']//input[@name='Email'])[position()=2]")
+    WebElement email;
 
-        @FindBy(xpath = "//input[@name='PhoneCountryCode']")
-        WebElement countryCode;
+    @FindBy(xpath = "//input[@name='PhoneCountryCode']")
+    WebElement countryCode;
 
-        @FindBy(xpath = "//input[@name='Phone']")
-        WebElement phoneNumber;
+    @FindBy(xpath = "//input[@name='Phone']")
+    WebElement phoneNumber;
 
-        @FindBy(xpath = "//input[@class='Send-Button']")
-        WebElement submitButton;
+    @FindBy(xpath = "//input[@class='Send-Button']")
+    WebElement submitButton;
 
-        @FindBy(xpath = "//button[@id='CybotCookiebotDialogBodyButtonDecline']")
-        WebElement denyBtn;
+    @FindBy(xpath = "//button[@id='CybotCookiebotDialogBodyButtonDecline']")
+    WebElement denyBtn;
 
-        @FindBy (xpath = "//div[@id='startTradingButton']")
-        WebElement continueBtn;
+    @FindBy(xpath = "//div[@id='startTradingButton']")
+    WebElement continueBtn;
 
-        @FindBy (xpath = "//div[@data-cmd='menu']")
-        WebElement menuBtn;
+    @FindBy(xpath = "//div[@data-cmd='menu']")
+    WebElement menuBtn;
 
-        @FindBy (xpath = "//div[@id='platformRegulation']")
-        WebElement regulationMsg;
+    @FindBy(xpath = "//div[@id='platformRegulation']")
+    WebElement regulationMsg;
 
-        public void enterFirstName(String firstNameData) {
-            typeText(firstName, firstNameData, "fist name");
-        }
+    @FindBy(xpath = "//div[@class='userExistsLabelInner']")
+    WebElement alrdRegEmailPopUp;
 
-        public void enterLastName(String lastNameData) {
-            typeText(lastName, lastNameData, "last name");
-        }
+    @FindBy(xpath = "//iframe[@id='myWidgetIframe']")
+    WebElement iFrameIConsent;
 
-        public void enterEmail(String emailData) {
-            typeText(email, emailData, "email name");
-        }
+    @FindBy(xpath = "//input[@value='I Consent']")
+    WebElement iConsentBtn;
 
-        public void enterCountryCode(String countryCodeData) {
-            typeText(countryCode, countryCodeData, "country code");
-        }
+    public void enterFirstName(String firstNameData) {
+        typeText(firstName, firstNameData, "fist name");
+    }
 
-        public void enterPhoneNumber(String phoneNumberData) {
-            typeText(phoneNumber, phoneNumberData, "phone number");
-        }
+    public void enterLastName(String lastNameData) {
+        typeText(lastName, lastNameData, "last name");
+    }
 
-        public void clickOnSubmitButton() {
-            clickElement(submitButton, "get started button");
-        }
+    public void enterEmail(String emailData) {
+        typeText(email, emailData, "email name");
+    }
 
-        public void clickDenyBtn(){
-            clickElement(denyBtn,"deny cookies button");
-        }
+    public void enterCountryCode(String countryCodeData) {
+        typeText(countryCode, countryCodeData, "country code");
+    }
 
-        public void successfullyRegistration(String firstNameData, String lastNameData, String emailData, String countryCodeData, String phoneNumberData) {
-            enterFirstName(firstNameData);
-            enterLastName(lastNameData);
-            enterEmail(emailData);
-            enterCountryCode(countryCodeData);
-            enterPhoneNumber(phoneNumberData);
-            clickDenyBtn();
-            clickOnSubmitButton();
-        }
-    public void assertURL(String url){
-        WebDriverWait wait = new WebDriverWait(driver,waitTime);
+    public void enterPhoneNumber(String phoneNumberData) {
+        typeText(phoneNumber, phoneNumberData, "phone number");
+    }
+
+    public void clickOnSubmitButton() {
+        clickElement(submitButton, "get started button");
+    }
+
+    public void clickDenyBtn() {
+        clickElement(denyBtn, "deny cookies button");
+    }
+
+    public void successfullyRegistration(String firstNameData, String lastNameData, String emailData, String countryCodeData, String phoneNumberData) {
+        enterFirstName(firstNameData);
+        enterLastName(lastNameData);
+        enterEmail(emailData);
+        enterCountryCode(countryCodeData);
+        enterPhoneNumber(phoneNumberData);
+        clickDenyBtn();
+        clickOnSubmitButton();
+    }
+
+    public void assertURL(String url) {
+        WebDriverWait wait = new WebDriverWait(driver, waitTime);
         wait.until(ExpectedConditions.urlContains(url));
-        Assert.assertEquals(driver.getCurrentUrl(),url);
+        Assert.assertEquals(driver.getCurrentUrl(), url);
     }
-    public void clickContinueBtn(){
-            clickElement(continueBtn,"continue button");
+
+    public void clickContinueBtn() {
+        clickElement(continueBtn, "continue button");
     }
-    public void clickMenuBtn(){
-            clickElement(menuBtn,"menu button");
+
+    public void clickMenuBtn() {
+            clickElement(menuBtn, "menu button");
     }
+
     public void checkRegulation(String regulation) throws IOException, AWTException {
-            String actualText = getText(regulationMsg, "regulation text");
-            clickDenyBtn();
-            switch (regulation){
-                case "FCA" : {
-                    Assert.assertEquals(actualText,"Broker: Fortrade Ltd. (FCA)");
-                    new BasePage(driver).takeScreenshot("Broker Fortrade Ltd FCA - successfully registered demo account",regulationMsg);
-                }
-                break;
-                case "cyses" : {
-                    Assert.assertEquals(actualText,"Broker: Fortrade Cyprus Ltd. (CySec)");
-                    new BasePage(driver).takeScreenshot("Broker Fortrade Cyprus Ltd CySec - successfully registered demo account", regulationMsg);
-                }
-                break;
-                case "Asic" : {
-                    Assert.assertEquals(actualText,"Broker: Fort Securities Australia Pty Ltd. (ASIC)");
-                    new BasePage(driver).takeScreenshot("Broker Fort Securities Australia Pty Ltd ASIC - successfully registered demo account",regulationMsg);
-                }break;
-                case "iiroc" : {
-                    Assert.assertEquals(actualText,"Broker: Fortrade Canada Limited (CIRO)");
-                    new BasePage(driver).takeScreenshot("Broker Fortrade Canada Limited CIRO - successfully registered demo account",regulationMsg);
-                }break;
-                case "FSC" :
-                default: {
-                    Assert.assertEquals(actualText,"Broker: Fortrade (Mauritius) Ltd (FSC)");
-                    new BasePage(driver).takeScreenshot("Broker Fortrade Mauritius Ltd FSC - successfully registered demo account",regulationMsg);
-                }break;
+        String actualText = getText(regulationMsg, "regulation text");
+        clickDenyBtn();
+        switch (regulation) {
+            case "FCA": {
+                Assert.assertEquals(actualText, "Broker: Fortrade Ltd. (FCA)");
+                new BasePage(driver).takeScreenshot("Broker Fortrade Ltd FCA - successfully registered demo account", regulationMsg);
             }
+            break;
+            case "cyses": {
+                Assert.assertEquals(actualText, "Broker: Fortrade Cyprus Ltd. (CySec)");
+                new BasePage(driver).takeScreenshot("Broker Fortrade Cyprus Ltd CySec - successfully registered demo account", regulationMsg);
+            }
+            break;
+            case "Asic": {
+                Assert.assertEquals(actualText, "Broker: Fort Securities Australia Pty Ltd. (ASIC)");
+                new BasePage(driver).takeScreenshot("Broker Fort Securities Australia Pty Ltd ASIC - successfully registered demo account", regulationMsg);
+            }
+            break;
+            case "iiroc": {
+                Assert.assertEquals(actualText, "Broker: Fortrade Canada Limited (CIRO)");
+                new BasePage(driver).takeScreenshot("Broker Fortrade Canada Limited CIRO - successfully registered demo account", regulationMsg);
+            }
+            break;
+            case "FSC":
+            default: {
+                Assert.assertEquals(actualText, "Broker: Fortrade (Mauritius) Ltd (FSC)");
+                new BasePage(driver).takeScreenshot("Broker Fortrade Mauritius Ltd FSC - successfully registered demo account", regulationMsg);
+            }
+            break;
+        }
+    }
+
+    public void alreadyRegisteredAccount(String firstNameData, String lastNameData, String emailData, String countryCodeData, String phoneNumberData) {
+        enterFirstName(firstNameData);
+        enterLastName(lastNameData);
+        enterEmail(emailData);
+        enterCountryCode(countryCodeData);
+        enterPhoneNumber(phoneNumberData);
+        clickOnSubmitButton();
+    }
+
+    private String expTextForPopUp = "Invalid email. Please try another or proceed to log in. If needed, reset your password in case it's forgotten.";
+
+    public void assertPopUpForAlreadyRegisteredAccount(String fileName) throws IOException, AWTException {
+        Assert.assertEquals(getTextBy(alrdRegEmailPopUp, "alrdRegEmailPopUp"), expTextForPopUp);
+        new BasePage(driver).takeScreenshot(fileName , alrdRegEmailPopUp);
+    }
+
+    public void clickConsentBtn() throws InterruptedException {
+        driver.switchTo().frame(iFrameIConsent);
+        try {
+            clickElement(iConsentBtn, "I Consent button");
+        } catch (Exception e){
+            System.out.println(e);
+        }
+        driver.switchTo().defaultContent();
+        Thread.sleep(2500);
     }
 }
