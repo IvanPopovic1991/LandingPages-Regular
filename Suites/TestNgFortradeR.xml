@@ -5,7 +5,7 @@
         <classes>
             <class name="TestsFortradeR.EducationLp">
                 <methods>
-                    <include name="alreadyRegisteredAccountTest"/>
+                    <include name="checkingTagsInTheCrm"/>
                 </methods>
             </class>
         </classes>

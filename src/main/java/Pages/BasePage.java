@@ -1,9 +1,6 @@
 package Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -39,32 +36,17 @@ public class BasePage {
             wait.until(ExpectedConditions.visibilityOf(element));
             wait.until(ExpectedConditions.elementToBeClickable(element));
 
+            scrollToAnElement(element);
             Actions actions = new Actions(driver);
             actions.moveToElement(element).click().build().perform();
             System.out.println("Clicked " + log);
         } catch (StaleElementReferenceException e) {
+            scrollToAnElement(element);
             Actions actions = new Actions(driver);
             actions.moveToElement(element).click().build().perform();
             System.out.println("Clicked " + log);
         }
     }
-    public void clickElement(WebElement invisibleElement, WebElement element, String log) {
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, waitTime);
-            wait.until(ExpectedConditions.invisibilityOf(invisibleElement));
-            wait.until(ExpectedConditions.visibilityOf(element));
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-
-            Actions actions = new Actions(driver);
-            actions.moveToElement(element).click().build().perform();
-            System.out.println("Clicked " + log);
-        } catch (StaleElementReferenceException e) {
-            Actions actions = new Actions(driver);
-            actions.moveToElement(element).click().build().perform();
-            System.out.println("Clicked " + log);
-        }
-    }
-
     public void typeText(WebElement element, String text, String log) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, waitTime);
@@ -202,5 +184,36 @@ public class BasePage {
             System.out.println("Get text from " + log + " element");
             return element.getText();
         }
+    }
+    public String readAttribute(By elementBy, String attribute, String log){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(elementBy));
+
+            System.out.println("Get text from " + log + " element");
+            return driver.findElement(elementBy).getAttribute(attribute);
+        } catch (StaleElementReferenceException e) {
+
+            System.out.println("Get text from " + log + " element");
+            return driver.findElement(elementBy).getAttribute(attribute);
+        }
+    }
+    public String readAttribute(WebElement element, String attribute, String log){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOf(element));
+
+            System.out.println("Get text from " + log + " element");
+            return element.getAttribute(attribute);
+        } catch (StaleElementReferenceException e) {
+
+            System.out.println("Get text from " + log + " element");
+            return element.getAttribute(attribute);
+        }
+    }
+    public void scrollToAnElement(WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        js.executeScript("window.scrollBy(0, -200);");
     }
 }

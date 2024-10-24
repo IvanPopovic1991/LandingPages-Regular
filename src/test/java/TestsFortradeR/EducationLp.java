@@ -1,4 +1,5 @@
 package TestsFortradeR;
+import Pages.CrmPage;
 import Pages.FortradeRPage;
 import faker.TestData;
 import org.testng.annotations.AfterMethod;
@@ -34,5 +35,18 @@ public class EducationLp extends BaseTestFortradeR {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.alreadyRegisteredAccount("Testq", "Testa", email, "381", phoneNumber);
         fortradeRPage.assertPopUpForAlreadyRegisteredAccount("Already registered account - FortradeR - pop-up");
+    }
+    @Test
+    public void checkingTagsInTheCrm() throws IOException, AWTException {
+        demoAccountRegistration();
+        String urlCrm = System.getenv("URLForCrm");
+        String usernameCrm = System.getenv("UsernameForCrm");
+        String passwordCrm = System.getenv("PasswordForCrm");
+        driver.get(urlCrm);
+        CrmPage crmPage = new CrmPage(driver);
+        crmPage.checkCrmData(usernameCrm, passwordCrm, email, "Testq Testa");
+        crmPage.takeScreenshot("Account details", crmPage.accFullNameCrm);
+        crmPage.checkCrmTags();
+        crmPage.takeScreenshot("Marketing tags", crmPage.accFullNameCrm);
     }
 }
