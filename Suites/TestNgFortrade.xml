@@ -7,29 +7,29 @@
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="alreadyRegisteredAccountTest"/>
+                    <include name="checkingTagsInTheCRM"/>
                 </methods>
             </class>
         </classes>
     </test>
     <test name="Demo Account Registration - FCA Regulation">
-        <parameter name="countryCode" value="44"/>
         <parameter name="regulation" value="FCA"/>
+        <parameter name="countryCode" value="44"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="alreadyRegisteredAccountTest"/>
+                    <include name="checkingTagsInTheCRM"/>
                 </methods>
             </class>
         </classes>
     </test>
     <test name="Demo Account Registration - Asic Regulation">
-        <parameter name="countryCode" value="61"/>
         <parameter name="regulation" value="Asic"/>
+        <parameter name="countryCode" value="61"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="alreadyRegisteredAccountTest"/>
+                    <include name="checkingTagsInTheCRM"/>
                 </methods>
             </class>
         </classes>
@@ -40,21 +40,17 @@
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="alreadyRegisteredAccountTest"/>
+                    <include name="checkingTagsInTheCRM"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <!-- Currently restricted -->
-    <!--<test name="Demo Account Registration - Cysec Regulation">
+<!--     Currently restricted
+    <test name="Demo Account Registration - Cysec Regulation">
         <parameter name="countryCode" value="357"/>
         <parameter name="regulation" value="cysec"/>
         <classes>
-            <class name="TestsFortrade.EducationLp">
-                <methods>
-                    <include name="alreadyRegisteredAccountTest"/>
-                </methods>
-            </class>
+            <class name="TestsFortrade.EducationLp"/>
         </classes>
     </test>-->
 </suite>

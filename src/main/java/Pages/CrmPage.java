@@ -3,7 +3,6 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -31,7 +30,7 @@ public class CrmPage extends BasePage {
     WebElement searchInCrm;
     public @FindBy(xpath = "//a[@id='crmGrid_findCriteriaButton']//img[@id='crmGrid_findCriteriaImg']")
     WebElement searchBtnCrm;
-    public @FindBy(xpath = "//div[@id='crmGrid_divDataArea']//tr[@class='ms-crm-List-Row']")
+    public @FindBy(xpath = "//div[@id='crmGrid_divDataArea']//tr[@class='ms-crm-List-Row']/td[3]")
     WebElement accountCrm;
     public @FindBy(xpath = "//iframe[@id='contentIFrame1']")
     WebElement iFrameAccDetails;
@@ -39,6 +38,8 @@ public class CrmPage extends BasePage {
     WebElement accFullNameCrm;
     public @FindBy(xpath = "//div[@class='ms-crm-Inline-Value ms-crm-HeaderTile']")
     WebElement accDemoField;
+    public @FindBy(xpath = "//h2[@id='tab_4_header_h2' and contains(text(),'Environment & Marketing Info')]")
+    WebElement marketingSection;
 
     public @FindBy(xpath = "//a[@id='FormSecNavigationControl-Icon']")
     WebElement menuBtn;
@@ -78,7 +79,7 @@ public class CrmPage extends BasePage {
         Assert.assertEquals(valueOfTag, value);
     }
 
-    public void checkCrmData(String username, String password, String email, String fullName){
+    public void checkCrmData(String username, String password, String email, String fullName, String regulation){
         logInCrm(username, password);
         driver.switchTo().frame(iFrameMicrosoftCrm);
         try {
@@ -90,11 +91,10 @@ public class CrmPage extends BasePage {
         driver.switchTo().frame(iFrameSearch);
         typeText(searchInCrm, email, "search bar for email in CRM");
         clickElement(searchBtnCrm, "search button in CRM");
-        Actions actions = new Actions(driver);
-        actions.doubleClick(accountCrm).perform();
+        doubleClick(accountCrm,"account row");
         driver.switchTo().defaultContent();
         driver.switchTo().frame(iFrameAccDetails);
-        assertBorderColorInCRM("FSC");
+        assertBorderColorInCRM(regulation);
         Assert.assertEquals(readAttribute(accFullNameCrm, "title", "full name"), fullName);
         Assert.assertEquals(getText(accDemoField, "demo account field"), "Demo Registered");
         loopForAccDetailsCrm(email);

@@ -1,6 +1,5 @@
 package Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -78,7 +77,9 @@ public class FortradeRPage extends BasePage {
         enterPhoneNumber(phoneNumberData);
         clickOnSubmitButton();
     }
-    private String expTextForPopUp = "Invalid email. Please try another or proceed to log in. If needed, reset your password in case it's forgotten.";
+    private String expTextForPopUp = "Invalid email. Please try another or proceed to log in. If needed, reset your " +
+            "password in case it's forgotten.";
+
     public void assertPopUpForAlreadyRegisteredAccount(String fileName) throws IOException, AWTException {
         Assert.assertEquals(getTextBy(alrdRegEmailPopUp, "alrdRegEmailPopUp"), expTextForPopUp);
         new BasePage(driver).takeScreenshot(fileName,alrdRegEmailPopUp);
