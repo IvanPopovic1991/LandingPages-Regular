@@ -13,6 +13,8 @@ import java.io.IOException;
 public class EducationLp extends BaseTestFortradeR {
     String email = TestData.emailGenerator();
     String phoneNumber = TestData.phoneNumberGenerator();
+    String[] errorMessages = {"Please enter all your given first name(s)", "Please enter your last name in alphabetic characters"
+            , "Invalid email format.", "Invalid phone format."};
 
     @BeforeMethod
     public void setUp(){
@@ -27,6 +29,23 @@ public class EducationLp extends BaseTestFortradeR {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.successfullyRegistration("Testq","Testa", email,"381", phoneNumber);
         fortradeRPage.assertURL("https://ready.fortrade.com/#chartticket");
+    }
+    @Test
+    public void unsuccessfullyDemoAccountRegistration() throws IOException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.unsuccessfullyRegistrationWithWrongData("123", "456", "345342=--=/.,><",
+                "123456", "1234567890123456");
+        fortradeRPage.assertErrorMessages(errorMessages);
+        fortradeRPage.assertColor("red");
+        fortradeRPage.takeScreenshot("Unsuccessfully demo account registration", fortradeRPage.submitButton);
+    }
+    @Test
+    public void emptyDemoAccountRegistration() throws IOException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.unsuccessfullyRegistrationWithEmptyField("", "", "", "", "");
+        fortradeRPage.assertErrorMessages(errorMessages);
+        fortradeRPage.assertColor("red");
+        fortradeRPage.takeScreenshot("Empty demo account registration", fortradeRPage.submitButton);
     }
     @Test
     public void alreadyRegisteredAccountTest() throws IOException, AWTException {

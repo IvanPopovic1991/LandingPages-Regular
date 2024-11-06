@@ -1,5 +1,6 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,19 +18,19 @@ public class FortradeRPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "FirstName")
+    public @FindBy(id = "FirstName")
     WebElement firstName;
-    @FindBy(id = "LastName")
+    public @FindBy(id = "LastName")
     WebElement lastName;
-    @FindBy(xpath = "(//div[@class='LcWidgetTopWrapper ClField-Email lcFieldWrapper']//input[@name='Email'])[position()=2]")
+    public @FindBy(xpath = "(//div[@class='LcWidgetTopWrapper ClField-Email lcFieldWrapper']//input[@name='Email'])[position()=2]")
     WebElement email;
-    @FindBy(xpath = "//input[@name='PhoneCountryCode']")
+    public @FindBy(xpath = "//input[@name='PhoneCountryCode']")
     WebElement countryCode;
-    @FindBy(xpath = "//div[@class='phoneWrapper']//input[@placeholder='Phone']")
+    public @FindBy(xpath = "//div[@class='phoneWrapper']//input[@placeholder='Phone']")
     WebElement phoneNumber;
-    @FindBy(xpath = "//input[@class='Send-Button']")
+    public @FindBy(xpath = "//input[@class='Send-Button']")
     WebElement submitButton;
-    @FindBy(xpath = "//div[@class='userExistsLabelInner']")
+    public @FindBy(xpath = "//div[@class='userExistsLabelInner']")
     WebElement alrdRegEmailPopUp;
 
     public void enterFirstName(String firstNameData) {
@@ -62,7 +63,74 @@ public class FortradeRPage extends BasePage {
         enterEmail(emailData);
         enterCountryCode(countryCodeData);
         enterPhoneNumber(phoneNumberData);
+        //assertColor("green"); - razlikuje se od stranice do stranice
         clickOnSubmitButton();
+    }
+    public void unsuccessfullyRegistrationWithWrongData(String firstNameData, String lastNameData, String emailData, String countryCode, String phoneNumberData){
+        enterFirstName(firstNameData);
+        enterLastName(lastNameData);
+        enterEmail(emailData);
+        enterCountryCode(countryCode);
+        enterPhoneNumber(phoneNumberData);
+        clickOnSubmitButton();
+    }
+    public void unsuccessfullyRegistrationWithEmptyField(String firstNameData, String lastNameData, String emailData, String countryCode, String phoneNumberData){
+        enterFirstName(firstNameData);
+        enterLastName(lastNameData);
+        enterEmail(emailData);
+        enterCountryCode(countryCode);
+        enterPhoneNumber(phoneNumberData);
+        clickOnSubmitButton();
+    }
+
+    /**
+     * Izvlaci tekst iz DOM-a i poredi ih sa ocekivanim porukama definisanih u nizu errorMessages
+     * @param errorMessages
+     */
+    public void assertErrorMessages(String[] errorMessages){
+        for (int i = 1; i <=4; i++){
+            Assert.assertEquals(getTextBy(By.xpath("(//div[@class='errorValidationIn'])[position()=number]".replace("number", String.valueOf(i))),
+                    "error message " + errorMessages[i-1]), errorMessages[i-1]);
+        }
+    }
+
+    /**
+     * Metod assertColor koristimo za poredjenje boja input polja na formi za registraciju demo naloga
+     * Izvlaci rgb vrednost i razbija ga na tri vrednosti (red, green i blue), i na osnovu vrednosti parametra koji mu
+     * prosledis poredi ih sa definisanim vrednostima u metodi.
+     * @param color
+     */
+    public void assertColor (String color){
+        WebElement[] fields = {firstName, lastName, email, countryCode, phoneNumber};
+        for (int i = 0; i < fields.length; i++){
+            /**
+             * Ako prosledis color vrednost kao "rgb(123, 123, 132)" onda ukljuci ovaj kod
+             */
+            /*System.out.println("This is the border color: " + fields[i].getCssValue("border-color"));
+            Assert.assertEquals(fields[i].getCssValue("border-color"), color);*/
+            /**
+             * U suprotnom ako uneses vrednost kao "blue" onda ukljuci ovaj kod
+             */
+            String borderColor = fields[i].getCssValue("border-color");
+
+// Split the RGB value
+            String[] rgbValues = borderColor.replace("rgb(", "").replace(")", "").split(",");
+            int red = Integer.parseInt(rgbValues[0].trim());
+            int green = Integer.parseInt(rgbValues[1].trim());
+            int blue = Integer.parseInt(rgbValues[2].trim());
+
+// Assert if it has a 'red' tone (adjust threshold values as needed)
+            if (color.equalsIgnoreCase("red")){
+                System.out.println("This is the border color: " + borderColor);
+                Assert.assertTrue(red > 150 && green < 100 && blue < 100, "Border color is not approximately red.");
+            } else if (color.equalsIgnoreCase("blue")){
+                System.out.println("This is the border color: " + borderColor);
+                Assert.assertTrue(blue > 200 && green > 100 && red < 50, "Border color is not approximately blue.");
+            } else if (color.equalsIgnoreCase("green")){
+                System.out.println("This is the border color: " + borderColor);
+                Assert.assertTrue(green < 150 && red > 50 && red < 120 && blue > 50 && blue < 100, "Border color is not approximately green.");
+            }
+        }
     }
     public void assertURL(String url){
         WebDriverWait wait = new WebDriverWait(driver,waitTime);
