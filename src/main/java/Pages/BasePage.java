@@ -47,6 +47,7 @@ public class BasePage {
             System.out.println("Clicked " + log);
         }
     }
+
     public void typeText(WebElement element, String text, String log) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, waitTime);
@@ -109,7 +110,8 @@ public class BasePage {
             System.out.println("Typed " + text + " into " + log + " field");
         }
     }
-    public String getTextBy(By by, String log){
+
+    public String getTextBy(By by, String log) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, waitTime);
             wait.until(ExpectedConditions.visibilityOfElementLocated(by));
@@ -121,7 +123,8 @@ public class BasePage {
             return driver.findElement(by).getText();
         }
     }
-    public String getTextBy(WebElement element, String log){
+
+    public String getTextBy(WebElement element, String log) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, waitTime);
             wait.until(ExpectedConditions.visibilityOf(element));
@@ -185,7 +188,8 @@ public class BasePage {
             return element.getText();
         }
     }
-    public String readAttribute(By elementBy, String attribute, String log){
+
+    public String readAttribute(By elementBy, String attribute, String log) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, waitTime);
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(elementBy));
@@ -198,7 +202,8 @@ public class BasePage {
             return driver.findElement(elementBy).getAttribute(attribute);
         }
     }
-    public String readAttribute(WebElement element, String attribute, String log){
+
+    public String readAttribute(WebElement element, String attribute, String log) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, waitTime);
             wait.until(ExpectedConditions.visibilityOf(element));
@@ -211,9 +216,27 @@ public class BasePage {
             return element.getAttribute(attribute);
         }
     }
-    public void scrollToAnElement(WebElement element){
+
+    public void scrollToAnElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
         js.executeScript("window.scrollBy(0, -200);");
+    }
+
+    public void doubleClick(WebElement element, String log) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element).doubleClick().build().perform();
+            System.out.println("Double clicked " + log);
+        } catch (StaleElementReferenceException e) {
+            Actions actions = new Actions(driver);
+            actions.moveToElement(element).doubleClick().build().perform();
+            System.out.println("Double clicked " + log);
+        }
+
     }
 }

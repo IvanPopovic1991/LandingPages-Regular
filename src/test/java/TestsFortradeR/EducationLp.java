@@ -44,9 +44,9 @@ public class EducationLp extends BaseTestFortradeR {
         String passwordCrm = System.getenv("PasswordForCrm");
         driver.get(urlCrm);
         CrmPage crmPage = new CrmPage(driver);
-        crmPage.checkCrmData(usernameCrm, passwordCrm, email, "Testq Testa");
-        crmPage.takeScreenshot("Account details", crmPage.accFullNameCrm);
+        crmPage.checkCrmData(usernameCrm, passwordCrm, email, "Testq Testa", "FSC");
+        crmPage.takeScreenshot("Account details Fortrader page", crmPage.accFullNameCrm);
         crmPage.checkCrmTags();
-        crmPage.takeScreenshot("Marketing tags", crmPage.accFullNameCrm);
+        crmPage.takeScreenshot("Marketing tags Fortrader page", crmPage.accFullNameCrm);
     }
 }
