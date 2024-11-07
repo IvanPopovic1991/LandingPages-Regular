@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="FortradeR Pages">
+    <listeners>
+        <listener class-name="listeners.ScreenshotListener"/>
+        <listener class-name="listeners.Transform"/>
+    </listeners>
     <test name="Demo Account Registration">
         <classes>
             <class name="TestsFortradeR.EducationLp">
                 <methods>
                     <include name="unsuccessfullyDemoAccountRegistration"/>
                     <include name="emptyDemoAccountRegistration"/>
+                    <include name="checkingTagsInTheCrm"/>
                 </methods>
             </class>
         </classes>

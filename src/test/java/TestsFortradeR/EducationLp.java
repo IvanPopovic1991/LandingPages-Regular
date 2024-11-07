@@ -36,7 +36,7 @@ public class EducationLp extends BaseTestFortradeR {
         fortradeRPage.unsuccessfullyRegistrationWithWrongData("123", "456", "345342=--=/.,><",
                 "123456", "1234567890123456");
         fortradeRPage.assertErrorMessages(errorMessages);
-        fortradeRPage.assertColor("red");
+        fortradeRPage.assertColor("blue");
         fortradeRPage.takeScreenshot("Unsuccessfully demo account registration", fortradeRPage.submitButton);
     }
     @Test
@@ -57,7 +57,7 @@ public class EducationLp extends BaseTestFortradeR {
     }
     @Test
     public void checkingTagsInTheCrm() throws IOException, AWTException {
-        demoAccountRegistration();
+        alreadyRegisteredAccountTest();
         String urlCrm = System.getenv("URLForCrm");
         String usernameCrm = System.getenv("UsernameForCrm");
         String passwordCrm = System.getenv("PasswordForCrm");
