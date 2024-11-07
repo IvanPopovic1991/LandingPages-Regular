@@ -136,23 +136,6 @@ public class BasePage {
             return element.getText();
         }
     }
-//    /**
-//     * takeScreenShot - metoda za kreiranje screenshot-ova;
-//     */
-//    public void takeScreenshot(String fileName) throws IOException {
-//        /**
-//         * File file = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE); - eksplicitna konverzija drivera u fajl
-//         tipa TakesScreenshot; OutputType.File - Output file tipa FILE
-//         */
-//        File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-//        /**
-//         * .copyFile - metoda za kopiranje fajla ( iz klase FileUtils) iz prethodnog koraka u projekat (sadrzi dva parametara;
-//         * Prvi parametar se odnosi na file iz prethodnog koraka, drugi parametar se odnosi na lokaciju gde ce biti smesten fajl kao i naziv fajla).
-//         * Prilikom izvrsavanja takesScreenshot metode , metod ce kreirati folder 'screenshot' kao i naziv fajla
-//         */
-//        FileUtils.copyFile(file, new File("src/screenshot/" + fileName + ".jpg"));
-//    }
-
     /**
      * takeScreenShot - new method for taking full screenshot
      */
