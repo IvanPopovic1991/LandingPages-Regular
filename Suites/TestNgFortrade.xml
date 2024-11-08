@@ -6,45 +6,45 @@
         <listener class-name="listeners.Transform"/>
     </listeners>
     <test name="Demo Account Registration - FSC Regulation">
-        <parameter name="countryCode" value="381"/>
         <parameter name="regulation" value="FSC"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="checkingTagsInTheCRM"/>
+                    <include name="emptyDemoAccountRegistration"/>
+                    <include name="unsuccessfullyDemoAccountRegistration"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="Demo Account Registration - FCA Regulation">
+<test name="Demo Account Registration - FCA Regulation">
         <parameter name="regulation" value="FCA"/>
-        <parameter name="countryCode" value="44"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="checkingTagsInTheCRM"/>
+                    <include name="emptyDemoAccountRegistration"/>
+                    <include name="unsuccessfullyDemoAccountRegistration"/>
                 </methods>
             </class>
         </classes>
     </test>
     <test name="Demo Account Registration - Asic Regulation">
         <parameter name="regulation" value="Asic"/>
-        <parameter name="countryCode" value="61"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="checkingTagsInTheCRM"/>
+                    <include name="emptyDemoAccountRegistration"/>
+                    <include name="unsuccessfullyDemoAccountRegistration"/>
                 </methods>
             </class>
         </classes>
     </test>
     <test name="Demo Account Registration - Iiroc Regulation">
-        <parameter name="countryCode" value="1"/>
         <parameter name="regulation" value="iiroc"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="checkingTagsInTheCRM"/>
+                    <include name="emptyDemoAccountRegistration"/>
+                    <include name="unsuccessfullyDemoAccountRegistration"/>
                 </methods>
             </class>
         </classes>

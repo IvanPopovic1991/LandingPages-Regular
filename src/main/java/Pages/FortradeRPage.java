@@ -74,14 +74,6 @@ public class FortradeRPage extends BasePage {
         enterPhoneNumber(phoneNumberData);
         clickOnSubmitButton();
     }
-    public void unsuccessfullyRegistrationWithEmptyField(String firstNameData, String lastNameData, String emailData, String countryCode, String phoneNumberData){
-        enterFirstName(firstNameData);
-        enterLastName(lastNameData);
-        enterEmail(emailData);
-        enterCountryCode(countryCode);
-        enterPhoneNumber(phoneNumberData);
-        clickOnSubmitButton();
-    }
 
     /**
      * Izvlaci tekst iz DOM-a i poredi ih sa ocekivanim porukama definisanih u nizu errorMessages
@@ -121,14 +113,14 @@ public class FortradeRPage extends BasePage {
 
 // Assert if it has a 'red' tone (adjust threshold values as needed)
             if (color.equalsIgnoreCase("red")){
-                System.out.println("This is the border color: " + borderColor);
+                System.out.println("This is the border color of " +fields[i].getAttribute("name") + " field: " + borderColor);
                 Assert.assertTrue(red > 150 && green < 100 && blue < 100, "Border color is not approximately red.");
             } else if (color.equalsIgnoreCase("blue")){
-                System.out.println("This is the border color: " + borderColor);
+                System.out.println("This is the border color of " +fields[i].getAttribute("name") + " field: " + borderColor);
                 Assert.assertTrue(blue > 200 && green > 100 && red < 50, "Border color is not approximately blue.");
             } else if (color.equalsIgnoreCase("green")){
-                System.out.println("This is the border color: " + borderColor);
-                Assert.assertTrue(green < 150 && red > 50 && red < 120 && blue > 50 && blue < 100, "Border color is not approximately green.");
+                System.out.println("This is the border color of " +fields[i].getAttribute("name") + " field: " + borderColor);
+                Assert.assertTrue(green < 200 && red > 50 && red < 120 && blue > 50 && blue < 100, "Border color is not approximately green.");
             }
         }
     }

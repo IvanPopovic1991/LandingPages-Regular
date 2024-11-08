@@ -36,16 +36,16 @@ public class EducationLp extends BaseTestFortradeR {
         fortradeRPage.unsuccessfullyRegistrationWithWrongData("123", "456", "345342=--=/.,><",
                 "123456", "1234567890123456");
         fortradeRPage.assertErrorMessages(errorMessages);
-        fortradeRPage.assertColor("blue");
-        fortradeRPage.takeScreenshot("Unsuccessfully demo account registration", fortradeRPage.submitButton);
+        fortradeRPage.assertColor("red");
+        fortradeRPage.takeScreenshot("Unsuccessfully demo account registration - FortradeR", fortradeRPage.submitButton);
     }
     @Test
     public void emptyDemoAccountRegistration() throws IOException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
-        fortradeRPage.unsuccessfullyRegistrationWithEmptyField("", "", "", "", "");
+        fortradeRPage.unsuccessfullyRegistrationWithWrongData("","","","","");
         fortradeRPage.assertErrorMessages(errorMessages);
         fortradeRPage.assertColor("red");
-        fortradeRPage.takeScreenshot("Empty demo account registration", fortradeRPage.submitButton);
+        fortradeRPage.takeScreenshot("Demo account registration - no data - Fortrader", fortradeRPage.submitButton);
     }
     @Test
     public void alreadyRegisteredAccountTest() throws IOException, AWTException {

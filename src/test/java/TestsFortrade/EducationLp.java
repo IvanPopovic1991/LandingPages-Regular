@@ -41,7 +41,6 @@ public class EducationLp extends BaseTestFortrade {
         fortradePage.clickContinueBtn();
         if (regulation.equals("Asic")) {
             fortradePage.clickConsentBtn();
-            //fortradePage.clickDenyBtn();
         }
         fortradePage.clickMenuBtn();
         fortradePage.checkRegulation(regulation);
@@ -70,4 +69,23 @@ public class EducationLp extends BaseTestFortrade {
         crmPage.checkCrmTags();
         crmPage.takeScreenshot("Marketing Tags " + regulation + " regulation",crmPage.marketingSection);
         }
+
+    @Test
+    @Parameters({"regulation"})
+    public void unsuccessfullyDemoAccountRegistration(String regulation) throws IOException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.unsuccessfullyRegistrationWrongData("12/*","+-*5","test#123","123456","/*-+");
+        fortradePage.assertErrorMessages();
+        fortradePage.assertColor("red");
+        fortradePage.takeScreenshot("Unsuccessfully demo account registration " + regulation + " regulation", fortradePage.firstName);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void emptyDemoAccountRegistration(String regulation) throws IOException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.unsuccessfullyRegistrationWrongData("","","","","");
+        fortradePage.assertErrorMessages();
+        fortradePage.assertColor("red");
+        fortradePage.takeScreenshot("Demo account registration - no data " + regulation + " regulation", fortradePage.submitButton);
+    }
 }
