@@ -36,12 +36,10 @@ public class BasePage {
             wait.until(ExpectedConditions.visibilityOf(element));
             wait.until(ExpectedConditions.elementToBeClickable(element));
 
-            scrollToAnElement(element);
             Actions actions = new Actions(driver);
             actions.moveToElement(element).click().build().perform();
             System.out.println("Clicked " + log);
         } catch (StaleElementReferenceException e) {
-            scrollToAnElement(element);
             Actions actions = new Actions(driver);
             actions.moveToElement(element).click().build().perform();
             System.out.println("Clicked " + log);
@@ -136,6 +134,7 @@ public class BasePage {
             return element.getText();
         }
     }
+
     /**
      * takeScreenShot - new method for taking full screenshot
      */

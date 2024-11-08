@@ -1,5 +1,6 @@
 package Pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,46 +20,51 @@ public class FortradePage extends BasePage {
     }
 
     @FindBy(xpath = "//input[@name='FirstName']")
-    WebElement firstName;
+    public WebElement firstName;
 
     @FindBy(xpath = "//input[@name='LastName']")
-    WebElement lastName;
+    public WebElement lastName;
 
     @FindBy(xpath = "(//div[@class='LcWidgetTopWrapper ClField-Email lcFieldWrapper']//input[@name='Email'])[position()=2]")
-    WebElement email;
+    public WebElement email;
 
     @FindBy(xpath = "//input[@name='PhoneCountryCode']")
-    WebElement countryCode;
+    public WebElement countryCode;
 
     @FindBy(xpath = "//input[@name='Phone']")
-    WebElement phoneNumber;
+    public WebElement phoneNumber;
 
     @FindBy(xpath = "//input[@class='Send-Button']")
-    WebElement submitButton;
+    public WebElement submitButton;
 
     @FindBy(xpath = "//button[@id='CybotCookiebotDialogBodyButtonDecline']")
-    WebElement denyBtn;
+    public WebElement denyBtn;
 
     @FindBy(xpath = "//div[@id='startTradingButton']")
-    WebElement continueBtn;
+    public WebElement continueBtn;
 
     @FindBy(xpath = "//div[@data-cmd='menu']")
-    WebElement menuBtn;
+    public WebElement menuBtn;
 
     @FindBy(xpath = "//div[@id='platformRegulation']")
-    WebElement regulationMsg;
+    public WebElement regulationMsg;
 
     @FindBy(xpath = "//div[@class='userExistsLabelInner']")
-    WebElement alrdRegEmailPopUp;
+    public WebElement alrdRegEmailPopUp;
 
     @FindBy(xpath = "//iframe[@id='myWidgetIframe']")
-    WebElement iFrameIConsent;
+    public WebElement iFrameIConsent;
 
     @FindBy(xpath = "//input[@value='I Consent']")
-    WebElement iConsentBtn;
+    public WebElement iConsentBtn;
+
+    String[] errorMessages ={"Please enter all your given first name(s)",
+            "Please enter your last name in alphabetic characters",
+            "Invalid email format.",
+            "Invalid phone format."};
 
     public void enterFirstName(String firstNameData) {
-        typeText(firstName, firstNameData, "fist name");
+        typeText(firstName, firstNameData, "first name");
     }
 
     public void enterLastName(String lastNameData) {
@@ -91,6 +97,7 @@ public class FortradePage extends BasePage {
         enterEmail(emailData);
         enterCountryCode(countryCodeData);
         enterPhoneNumber(phoneNumberData);
+        assertColor("green");
         clickDenyBtn();
         clickOnSubmitButton();
     }
@@ -106,7 +113,7 @@ public class FortradePage extends BasePage {
     }
 
     public void clickMenuBtn() {
-            clickElement(menuBtn, "menu button");
+        clickElement(menuBtn, "menu button");
     }
 
     public void checkRegulation(String regulation) throws IOException, AWTException {
@@ -155,17 +162,67 @@ public class FortradePage extends BasePage {
 
     public void assertPopUpForAlreadyRegisteredAccount(String fileName) throws IOException, AWTException {
         Assert.assertEquals(getTextBy(alrdRegEmailPopUp, "alrdRegEmailPopUp"), expTextForPopUp);
-        new BasePage(driver).takeScreenshot(fileName , alrdRegEmailPopUp);
+        new BasePage(driver).takeScreenshot(fileName, alrdRegEmailPopUp);
     }
 
     public void clickConsentBtn() throws InterruptedException {
         driver.switchTo().frame(iFrameIConsent);
         try {
             clickElement(iConsentBtn, "I Consent button");
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         driver.switchTo().defaultContent();
         Thread.sleep(2500);
+    }
+
+    public void unsuccessfullyRegistrationWrongData(String firstNameData, String lastNameData, String emailData, String countryCode, String phoneNumberData) {
+        enterFirstName(firstNameData);
+        enterLastName(lastNameData);
+        enterEmail(emailData);
+        enterCountryCode(countryCode);
+        enterPhoneNumber(phoneNumberData);
+        clickOnSubmitButton();
+    }
+    public void assertErrorMessages(){
+        for (int i = 1; i<=4; i++){
+            Assert.assertEquals(getTextBy(By.xpath("(//div[@class='errorValidationIn'])[position()=number]".replace("number", String.valueOf(i))),"error message " + errorMessages[i-1]), errorMessages[i-1]);
+        }
+    }
+    /**
+     * Metod assertColor koristimo za poredjenje boja input polja na formi za registraciju demo naloga
+     * Izvlaci rgb vrednost i razbija ga na tri vrednosti (red, green i blue), i na osnovu vrednosti parametra koji mu
+     * prosledis poredi ih sa definisanim vrednostima u metodi.
+     * @param color
+     */
+    public void assertColor(String color){
+        WebElement[] fields = {firstName,lastName,email,countryCode,phoneNumber};
+        for (int i = 0; i < fields.length; i++){
+            /**
+             * Ako prosledis color vrednost kao "rgb(123, 123, 132)" onda ukljuci ovaj kod
+             */
+            /*System.out.println("This is the border color: " + fields[i].getCssValue("border-color"));
+            Assert.assertEquals(fields[i].getCssValue("border-color"), color);*/
+            /**
+             * U suprotnom ako uneses vrednost kao "blue" onda ukljuci ovaj kod
+             */
+            String borderColor = fields[i].getCssValue("border-color");
+            // Split the RGB value
+            String[] rgbValues = borderColor.replace("rgb(", "").replace(")", "").split(",");
+            int red = Integer.parseInt(rgbValues[0].trim());
+            int green = Integer.parseInt(rgbValues[1].trim());
+            int blue = Integer.parseInt(rgbValues[2].trim());
+            // Assert if it has a 'red' tone (adjust threshold values as needed)
+            if (color.equalsIgnoreCase("red")){
+                System.out.println("This is the border color of " +fields[i].getAttribute("name") + " field: " + borderColor);
+                Assert.assertTrue(red > 150 && green < 100 && blue < 100, "Border color is not approximately red.");
+            } else if (color.equalsIgnoreCase("blue")){
+                System.out.println("This is the border color of " + fields[i].getAttribute("name") + " field: " + borderColor);
+                Assert.assertTrue(blue > 200 && green > 100 && red < 50, "Border color is not approximately blue.");
+            } else if (color.equalsIgnoreCase("green")){
+                System.out.println("This is the border color of "+ fields[i].getAttribute("name") + "field: " + borderColor);
+                Assert.assertTrue(green < 200 && red > 50 && red < 120 && blue > 50 && blue < 100, "Border color is not approximately green.");
+            }
+        }
     }
 }
