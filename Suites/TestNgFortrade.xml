@@ -7,54 +7,54 @@
     </listeners>
     <test name="Demo Account Registration - FSC Regulation">
         <parameter name="regulation" value="FSC"/>
+        <parameter name="tag" value="?tg=skip&amp;G_GEO=2051&amp;regulation=FSC"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="emptyDemoAccountRegistration"/>
-                    <include name="unsuccessfullyDemoAccountRegistration"/>
+                    <include name="urlAssert"/>
                 </methods>
             </class>
         </classes>
     </test>
 <test name="Demo Account Registration - FCA Regulation">
         <parameter name="regulation" value="FCA"/>
+        <parameter name="tag" value="?tg=skip&amp;G_GEO=1006453&amp;regulation=FCA"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="emptyDemoAccountRegistration"/>
-                    <include name="unsuccessfullyDemoAccountRegistration"/>
+                    <include name="urlAssert"/>
                 </methods>
             </class>
         </classes>
     </test>
     <test name="Demo Account Registration - Asic Regulation">
         <parameter name="regulation" value="Asic"/>
+        <parameter name="tag" value="?tg=skip&amp;G_GEO=1000142&amp;regulation=ASIC"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="emptyDemoAccountRegistration"/>
-                    <include name="unsuccessfullyDemoAccountRegistration"/>
+                    <include name="urlAssert"/>
                 </methods>
             </class>
         </classes>
     </test>
     <test name="Demo Account Registration - Iiroc Regulation">
         <parameter name="regulation" value="iiroc"/>
+        <parameter name="tag" value="?tg=skip&amp;G_GEO=9077369&amp;regulation=IIROC"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="emptyDemoAccountRegistration"/>
-                    <include name="unsuccessfullyDemoAccountRegistration"/>
+                    <include name="urlAssert"/>
                 </methods>
             </class>
         </classes>
     </test>
-<!--     Currently restricted
-    <test name="Demo Account Registration - Cysec Regulation">
-        <parameter name="countryCode" value="357"/>
-        <parameter name="regulation" value="cysec"/>
-        <classes>
-            <class name="TestsFortrade.EducationLp"/>
-        </classes>
-    </test>-->
+<!--     Currently restricted-->
+<!--    <test name="Demo Account Registration - Cysec Regulation">-->
+<!--        <parameter name="countryCode" value="357"/>-->
+<!--        <parameter name="regulation" value="cysec"/>-->
+<!--        <classes>-->
+<!--            <class name="TestsFortrade.EducationLp"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

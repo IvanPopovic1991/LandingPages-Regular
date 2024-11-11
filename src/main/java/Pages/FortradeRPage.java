@@ -20,16 +20,22 @@ public class FortradeRPage extends BasePage {
 
     public @FindBy(id = "FirstName")
     WebElement firstName;
+
     public @FindBy(id = "LastName")
     WebElement lastName;
+
     public @FindBy(xpath = "(//div[@class='LcWidgetTopWrapper ClField-Email lcFieldWrapper']//input[@name='Email'])[position()=2]")
     WebElement email;
+
     public @FindBy(xpath = "//input[@name='PhoneCountryCode']")
     WebElement countryCode;
+
     public @FindBy(xpath = "//div[@class='phoneWrapper']//input[@placeholder='Phone']")
     WebElement phoneNumber;
+
     public @FindBy(xpath = "//input[@class='Send-Button']")
     WebElement submitButton;
+
     public @FindBy(xpath = "//div[@class='userExistsLabelInner']")
     WebElement alrdRegEmailPopUp;
 

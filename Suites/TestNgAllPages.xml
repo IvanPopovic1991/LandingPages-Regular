@@ -7,6 +7,6 @@
     </listeners>
     <suite-files>
         <suite-file path="TestNgFortrade.xml"/>
-         <suite-file path="TestNgFortradeR.xml"/>
+        <suite-file path="TestNgFortradeR.xml"/>
     </suite-files>
 </suite>
