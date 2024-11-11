@@ -157,6 +157,18 @@ public class BasePage {
         ImageIO.write(screenFullImage, "PNG", new File("src/screenshot/" + fileName + ".png"));
     }
 
+    public void takeScreenshot(String fileName) throws AWTException, IOException {
+
+        // Using java.awt.Robot and java.awt.Dimension for full screen capture
+        Robot robot = new Robot();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        java.awt.Rectangle screenRect = new java.awt.Rectangle(screenSize);
+        BufferedImage screenFullImage = robot.createScreenCapture(screenRect);
+
+        // Saving the full screen image
+        ImageIO.write(screenFullImage, "PNG", new File("src/screenshot/" + fileName + ".png"));
+    }
+
     public String getText(WebElement element, String log) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, waitTime);

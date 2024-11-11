@@ -19,6 +19,18 @@ public class FortradePage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    @FindBy(xpath = "//body[@data-lcreg]")
+    public WebElement bodyTag;
+
+    @FindBy(xpath = "//div[contains(@class,'logo')]")
+    public WebElement logo;
+
+    @FindBy(xpath = "//div[contains(@class,'logo iirocClass')]")
+    public WebElement logoIiroc;
+
+    @FindBy(xpath = "//div[contains(@class,'logo cysecClass')]")
+    public WebElement logoCysec;
+
     @FindBy(xpath = "//input[@name='FirstName']")
     public WebElement firstName;
 

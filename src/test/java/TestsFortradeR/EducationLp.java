@@ -1,7 +1,10 @@
 package TestsFortradeR;
+
 import Pages.CrmPage;
 import Pages.FortradeRPage;
 import faker.TestData;
+import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,19 +20,33 @@ public class EducationLp extends BaseTestFortradeR {
             , "Invalid email format.", "Invalid phone format."};
 
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
         baseSetup("Chrome", "130");
     }
+
     @AfterMethod
-    public void tearDown(){
+    public void tearDown() {
         baseTearDown();
     }
+
     @Test
-    public void demoAccountRegistration(){
+    public void urlAssert() throws IOException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
-        fortradeRPage.successfullyRegistration("Testq","Testa", email,"381", phoneNumber);
+        fortradeRPage.assertURL("https://www.fortrader.com/minilps/en/education/");
+        //last element uploaded - input field with attribute value='quick'
+        String quickValue = driver.findElement(By.xpath("//form[@class='LC-QuickRegistrationMultiTraderWithVerify" +
+                "PhoneWidget']/input[@value='quick']")).getAttribute("value");
+        Assert.assertEquals("quick", quickValue);
+        fortradeRPage.takeScreenshot("Page url - FortradeR - verified");
+    }
+
+    @Test
+    public void demoAccountRegistration() {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.successfullyRegistration("Testq", "Testa", email, "381", phoneNumber);
         fortradeRPage.assertURL("https://ready.fortrade.com/#chartticket");
     }
+
     @Test
     public void unsuccessfullyDemoAccountRegistration() throws IOException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
@@ -39,14 +56,16 @@ public class EducationLp extends BaseTestFortradeR {
         fortradeRPage.assertColor("red");
         fortradeRPage.takeScreenshot("Unsuccessfully demo account registration - FortradeR", fortradeRPage.submitButton);
     }
+
     @Test
     public void emptyDemoAccountRegistration() throws IOException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
-        fortradeRPage.unsuccessfullyRegistrationWithWrongData("","","","","");
+        fortradeRPage.unsuccessfullyRegistrationWithWrongData("", "", "", "", "");
         fortradeRPage.assertErrorMessages(errorMessages);
         fortradeRPage.assertColor("red");
         fortradeRPage.takeScreenshot("Demo account registration - no data - Fortrader", fortradeRPage.submitButton);
     }
+
     @Test
     public void alreadyRegisteredAccountTest() throws IOException, AWTException {
         demoAccountRegistration();
@@ -55,9 +74,13 @@ public class EducationLp extends BaseTestFortradeR {
         fortradeRPage.alreadyRegisteredAccount("Testq", "Testa", email, "381", phoneNumber);
         fortradeRPage.assertPopUpForAlreadyRegisteredAccount("Already registered account - FortradeR - pop-up");
     }
+
     @Test
     public void checkingTagsInTheCrm() throws IOException, AWTException {
-        alreadyRegisteredAccountTest();
+        driver.get("https://www.fortrader.com/minilps/en/education/?tg=ivanA1389&tag1=ivanB@1389&tag2=ivanL1389&tag3=" +
+                "ivanM1389&gid=ivanC@1389&G_GEO=ivanD1389&G_GEOint=ivanE1389&G_Device=ivanF1389&G_DeviceModel=ivanG1389&G_" +
+                "AdPos=ivanH1389&g_Track=ivanI1389&Track=ivanj1389&gclid=ivanK1389");
+        demoAccountRegistration();
         String urlCrm = System.getenv("URLForCrm");
         String usernameCrm = System.getenv("UsernameForCrm");
         String passwordCrm = System.getenv("PasswordForCrm");

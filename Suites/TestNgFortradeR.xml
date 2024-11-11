@@ -9,9 +9,7 @@
         <classes>
             <class name="TestsFortradeR.EducationLp">
                 <methods>
-                    <include name="unsuccessfullyDemoAccountRegistration"/>
-                    <include name="emptyDemoAccountRegistration"/>
-                    <include name="checkingTagsInTheCrm"/>
+                    <include name="urlAssert"/>
                 </methods>
             </class>
         </classes>
