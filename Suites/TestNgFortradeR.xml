@@ -9,7 +9,7 @@
         <classes>
             <class name="TestsFortradeR.EducationLp">
                 <methods>
-                    <include name="sameFNameAndLName"/>
+                    <include name="demoAccountRegistration"/>
                 </methods>
             </class>
         </classes>
