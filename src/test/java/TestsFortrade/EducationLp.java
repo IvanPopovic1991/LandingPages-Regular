@@ -120,4 +120,15 @@ public class EducationLp extends BaseTestFortrade {
         fortradePage.assertColor("red");
         fortradePage.takeScreenshot("Demo account registration - no data " + regulation + " regulation", fortradePage.submitButton);
     }
+    @Test
+    @Parameters({"regulation"})
+    public void sameFNameAndLName(String regulation) throws IOException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.enterFirstName("Test");
+        fortradePage.enterLastName("Test");
+        fortradePage.clickElement(fortradePage.firstName, "on the first name field");
+        fortradePage.clickElement(fortradePage.lastName, "on the last name field");
+        fortradePage.assertSameNameErrorMsgs();
+        fortradePage.takeScreenshot("Error messages for the same first and last name - "+regulation+" regulation");
+    }
 }
