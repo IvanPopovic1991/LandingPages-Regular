@@ -39,6 +39,14 @@ public class FortradeRPage extends BasePage {
     public @FindBy(xpath = "//div[@class='userExistsLabelInner']")
     WebElement alrdRegEmailPopUp;
 
+    String[] errorMessages = {"Please enter all your given first name(s)",
+            "Please enter your last name in alphabetic characters",
+            "Invalid email format.",
+            "Invalid phone format."};
+
+    String[] sameNamesErrorMessages = {"Your first name must be different from your last name",
+            "Your first name must be different from your last name"};
+
     public void enterFirstName(String firstNameData) {
         typeText(firstName, firstNameData, "first name");
     }
@@ -83,15 +91,19 @@ public class FortradeRPage extends BasePage {
 
     /**
      * Izvlaci tekst iz DOM-a i poredi ih sa ocekivanim porukama definisanih u nizu errorMessages
-     * @param errorMessages
      */
-    public void assertErrorMessages(String[] errorMessages){
+    public void assertErrorMessages(){
         for (int i = 1; i <=4; i++){
             Assert.assertEquals(getTextBy(By.xpath("(//div[@class='errorValidationIn'])[position()=number]".replace("number", String.valueOf(i))),
                     "error message " + errorMessages[i-1]), errorMessages[i-1]);
         }
     }
 
+    public void assertSameNameErrorMsgs() {
+        for (int i = 1; i<=2; i++) {
+            Assert.assertEquals(getTextBy(By.xpath("(//div[@class='errorValidationIn'])[position()=number]".replace("number", String.valueOf(i))),
+                    "error message " +sameNamesErrorMessages[i-1]), sameNamesErrorMessages[i-1]);        }
+    }
     /**
      * Metod assertColor koristimo za poredjenje boja input polja na formi za registraciju demo naloga
      * Izvlaci rgb vrednost i razbija ga na tri vrednosti (red, green i blue), i na osnovu vrednosti parametra koji mu

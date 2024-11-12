@@ -9,7 +9,7 @@
         <classes>
             <class name="TestsFortradeR.EducationLp">
                 <methods>
-                    <include name="urlAssert"/>
+                    <include name="sameFNameAndLName"/>
                 </methods>
             </class>
         </classes>

@@ -18,6 +18,8 @@ public class EducationLp extends BaseTestFortradeR {
     String phoneNumber = TestData.phoneNumberGenerator();
     String[] errorMessages = {"Please enter all your given first name(s)", "Please enter your last name in alphabetic characters"
             , "Invalid email format.", "Invalid phone format."};
+    String[] sameNameErrorMsg = {"Your first name must be different from your last name",
+            "Your first name must be different from your last name"};
 
     @BeforeMethod
     public void setUp() {
@@ -52,7 +54,7 @@ public class EducationLp extends BaseTestFortradeR {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.unsuccessfullyRegistrationWithWrongData("123", "456", "345342=--=/.,><",
                 "123456", "1234567890123456");
-        fortradeRPage.assertErrorMessages(errorMessages);
+        fortradeRPage.assertErrorMessages();
         fortradeRPage.assertColor("red");
         fortradeRPage.takeScreenshot("Unsuccessfully demo account registration - FortradeR", fortradeRPage.submitButton);
     }
@@ -61,7 +63,7 @@ public class EducationLp extends BaseTestFortradeR {
     public void emptyDemoAccountRegistration() throws IOException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.unsuccessfullyRegistrationWithWrongData("", "", "", "", "");
-        fortradeRPage.assertErrorMessages(errorMessages);
+        fortradeRPage.assertErrorMessages();
         fortradeRPage.assertColor("red");
         fortradeRPage.takeScreenshot("Demo account registration - no data - Fortrader", fortradeRPage.submitButton);
     }
@@ -90,5 +92,16 @@ public class EducationLp extends BaseTestFortradeR {
         crmPage.takeScreenshot("Account details Fortrader page", crmPage.accFullNameCrm);
         crmPage.checkCrmTags();
         crmPage.takeScreenshot("Marketing tags Fortrader page", crmPage.accFullNameCrm);
+    }
+
+    @Test
+    public void sameFNameAndLName() throws IOException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.enterFirstName("Test");
+        fortradeRPage.enterLastName("Test");
+        fortradeRPage.clickElement(fortradeRPage.firstName, "on first name field");
+        fortradeRPage.clickElement(fortradeRPage.lastName, "on last name field");
+        fortradeRPage.assertSameNameErrorMsgs();
+        fortradeRPage.takeScreenshot("Error messages for the same first and last name - FortradeR");
     }
 }

@@ -70,10 +70,13 @@ public class FortradePage extends BasePage {
     @FindBy(xpath = "//input[@value='I Consent']")
     public WebElement iConsentBtn;
 
-    String[] errorMessages ={"Please enter all your given first name(s)",
+    String[] errorMessages = {"Please enter all your given first name(s)",
             "Please enter your last name in alphabetic characters",
             "Invalid email format.",
             "Invalid phone format."};
+
+    String[] sameNamesErrorMessages = {"Your first name must be different from your last name",
+            "Your first name must be different from your last name"};
 
     public void enterFirstName(String firstNameData) {
         typeText(firstName, firstNameData, "first name");
@@ -196,20 +199,29 @@ public class FortradePage extends BasePage {
         enterPhoneNumber(phoneNumberData);
         clickOnSubmitButton();
     }
-    public void assertErrorMessages(){
-        for (int i = 1; i<=4; i++){
-            Assert.assertEquals(getTextBy(By.xpath("(//div[@class='errorValidationIn'])[position()=number]".replace("number", String.valueOf(i))),"error message " + errorMessages[i-1]), errorMessages[i-1]);
+
+    public void assertErrorMessages() {
+        for (int i = 1; i <= 4; i++) {
+            Assert.assertEquals(getTextBy(By.xpath("(//div[@class='errorValidationIn'])[position()=number]".replace("number", String.valueOf(i))), "error message " + errorMessages[i - 1]), errorMessages[i - 1]);
         }
     }
+
+    public void assertSameNameErrorMsgs(){
+        for (int i = 1; i <=2 ; i++ ){
+            Assert.assertEquals(getTextBy(By.xpath("(//div[@class='errorValidationIn'])[position()=number]".replace("number",String.valueOf(i))),"Error message : " + sameNamesErrorMessages[i-1]), sameNamesErrorMessages[i-1]);
+        }
+    }
+
     /**
      * Metod assertColor koristimo za poredjenje boja input polja na formi za registraciju demo naloga
      * Izvlaci rgb vrednost i razbija ga na tri vrednosti (red, green i blue), i na osnovu vrednosti parametra koji mu
      * prosledis poredi ih sa definisanim vrednostima u metodi.
+     *
      * @param color
      */
-    public void assertColor(String color){
-        WebElement[] fields = {firstName,lastName,email,countryCode,phoneNumber};
-        for (int i = 0; i < fields.length; i++){
+    public void assertColor(String color) {
+        WebElement[] fields = {firstName, lastName, email, countryCode, phoneNumber};
+        for (int i = 0; i < fields.length; i++) {
             /**
              * Ako prosledis color vrednost kao "rgb(123, 123, 132)" onda ukljuci ovaj kod
              */
@@ -225,14 +237,14 @@ public class FortradePage extends BasePage {
             int green = Integer.parseInt(rgbValues[1].trim());
             int blue = Integer.parseInt(rgbValues[2].trim());
             // Assert if it has a 'red' tone (adjust threshold values as needed)
-            if (color.equalsIgnoreCase("red")){
-                System.out.println("This is the border color of " +fields[i].getAttribute("name") + " field: " + borderColor);
+            if (color.equalsIgnoreCase("red")) {
+                System.out.println("This is the border color of " + fields[i].getAttribute("name") + " field: " + borderColor);
                 Assert.assertTrue(red > 150 && green < 100 && blue < 100, "Border color is not approximately red.");
-            } else if (color.equalsIgnoreCase("blue")){
+            } else if (color.equalsIgnoreCase("blue")) {
                 System.out.println("This is the border color of " + fields[i].getAttribute("name") + " field: " + borderColor);
                 Assert.assertTrue(blue > 200 && green > 100 && red < 50, "Border color is not approximately blue.");
-            } else if (color.equalsIgnoreCase("green")){
-                System.out.println("This is the border color of "+ fields[i].getAttribute("name") + "field: " + borderColor);
+            } else if (color.equalsIgnoreCase("green")) {
+                System.out.println("This is the border color of " + fields[i].getAttribute("name") + "field: " + borderColor);
                 Assert.assertTrue(green < 200 && red > 50 && red < 120 && blue > 50 && blue < 100, "Border color is not approximately green.");
             }
         }

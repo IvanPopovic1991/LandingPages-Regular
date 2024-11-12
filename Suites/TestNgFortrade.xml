@@ -7,11 +7,12 @@
     </listeners>
     <test name="Demo Account Registration - FSC Regulation">
         <parameter name="regulation" value="FSC"/>
+        <parameter name="countryCode" value="381"/>
         <parameter name="tag" value="?tg=skip&amp;G_GEO=2051&amp;regulation=FSC"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="urlAssert"/>
+                    <include name="sameFNameAndLName"/>
                 </methods>
             </class>
         </classes>
@@ -19,10 +20,11 @@
 <test name="Demo Account Registration - FCA Regulation">
         <parameter name="regulation" value="FCA"/>
         <parameter name="tag" value="?tg=skip&amp;G_GEO=1006453&amp;regulation=FCA"/>
+    <parameter name="countryCode" value="44"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="urlAssert"/>
+                    <include name="sameFNameAndLName"/>
                 </methods>
             </class>
         </classes>
@@ -30,10 +32,11 @@
     <test name="Demo Account Registration - Asic Regulation">
         <parameter name="regulation" value="Asic"/>
         <parameter name="tag" value="?tg=skip&amp;G_GEO=1000142&amp;regulation=ASIC"/>
+        <parameter name="countryCode" value="61"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="urlAssert"/>
+                    <include name="sameFNameAndLName"/>
                 </methods>
             </class>
         </classes>
@@ -41,10 +44,11 @@
     <test name="Demo Account Registration - Iiroc Regulation">
         <parameter name="regulation" value="iiroc"/>
         <parameter name="tag" value="?tg=skip&amp;G_GEO=9077369&amp;regulation=IIROC"/>
+        <parameter name="countryCode" value="1"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="urlAssert"/>
+                    <include name="sameFNameAndLName"/>
                 </methods>
             </class>
         </classes>
