@@ -129,6 +129,13 @@ public class EducationLp extends BaseTestFortrade {
         fortradePage.clickElement(fortradePage.firstName, "on the first name field");
         fortradePage.clickElement(fortradePage.lastName, "on the last name field");
         fortradePage.assertSameNameErrorMsgs();
-        fortradePage.takeScreenshot("Error messages for the same first and last name - "+regulation+" regulation");
+        fortradePage.takeScreenshot("Error messages for the same first and last name - " + regulation + " regulation");
+    }
+    @Test
+    @Parameters({"regulation", "tag"})
+    public void checkingLogoClickability(String regulation, String tag) throws IOException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.checkLogoClickability(regulation, "https://www.fortrade.com/minilps/en/education/" + tag);
+        fortradePage.takeScreenshot("Logo is not clickable - " + regulation + " regulation");
     }
 }

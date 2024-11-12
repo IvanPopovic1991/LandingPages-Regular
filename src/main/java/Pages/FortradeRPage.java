@@ -11,6 +11,9 @@ import org.testng.Assert;
 
 import java.awt.*;
 import java.io.IOException;
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FortradeRPage extends BasePage {
     public FortradeRPage(WebDriver driver) {
@@ -46,6 +49,9 @@ public class FortradeRPage extends BasePage {
 
     String[] sameNamesErrorMessages = {"Your first name must be different from your last name",
             "Your first name must be different from your last name"};
+
+    public @FindBy(xpath = "//header/a/div[@class='logo']")
+    WebElement fortradeLogo;
 
     public void enterFirstName(String firstNameData) {
         typeText(firstName, firstNameData, "first name");
@@ -161,5 +167,19 @@ public class FortradeRPage extends BasePage {
     public void assertPopUpForAlreadyRegisteredAccount(String fileName) throws IOException, AWTException {
         Assert.assertEquals(getTextBy(alrdRegEmailPopUp, "alrdRegEmailPopUp"), expTextForPopUp);
         new BasePage(driver).takeScreenshot(fileName,alrdRegEmailPopUp);
+    }
+
+    public void checkLogoClickability(String url){
+        WebDriverWait driverWait = new WebDriverWait(driver, 10);
+        driverWait.until(ExpectedConditions.visibilityOf(fortradeLogo));
+        try {
+            fortradeLogo.click();
+            System.out.println("Logo is not clickable.");
+        } catch (Exception e){
+            System.out.println("Logo is not clickable, as expected.");
+        }
+        assertURL(url);
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        Assert.assertEquals(tabs.size(), 1);
     }
 }

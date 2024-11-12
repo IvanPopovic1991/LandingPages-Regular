@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -14,10 +15,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BasePage {
     WebDriver driver;
-    int waitTime = 15;
+    int waitTime = 20;
 
     /**
      * PageFactory- koristi se za direktno kreiranje web elemenata. Omogucava nam da sacuvamo veb element bez koricenja
@@ -231,6 +234,34 @@ public class BasePage {
             actions.moveToElement(element).doubleClick().build().perform();
             System.out.println("Double clicked " + log);
         }
+    }
 
+    public void performRightClick(WebElement element, String url, String log){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            String linkUrl = readAttribute(element, "href", "attribute url");
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.open(arguments[0], '_blank');", linkUrl);
+            List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+            driver.switchTo().window(tabs.get(1));
+            Assert.assertTrue(driver.getCurrentUrl().contains(url));
+            driver.close();
+            driver.switchTo().window(tabs.get(0));
+
+            System.out.println("Right click on " + log);
+        } catch (StaleElementReferenceException e) {
+            String linkUrl = readAttribute(element, "href", "attribute url");
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.open(arguments[0], '_blank');", linkUrl);
+            List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+            driver.switchTo().window(tabs.get(1));
+            Assert.assertTrue(driver.getCurrentUrl().contains(url));
+            driver.close();
+            driver.switchTo().window(tabs.get(0));
+
+            System.out.println("Right click on " + log);
+        }
     }
 }

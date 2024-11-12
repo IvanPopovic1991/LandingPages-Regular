@@ -11,6 +11,8 @@ import org.testng.Assert;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FortradePage extends BasePage {
 
@@ -247,6 +249,46 @@ public class FortradePage extends BasePage {
                 System.out.println("This is the border color of " + fields[i].getAttribute("name") + "field: " + borderColor);
                 Assert.assertTrue(green < 200 && red > 50 && red < 120 && blue > 50 && blue < 100, "Border color is not approximately green.");
             }
+        }
+    }
+    public void checkLogoClickability(String regulation, String url){
+        if (regulation.equalsIgnoreCase("fsc") || regulation.equalsIgnoreCase("fca")
+        || regulation.equalsIgnoreCase("asic")){
+                WebDriverWait driverWait = new WebDriverWait(driver, 10);
+                driverWait.until(ExpectedConditions.visibilityOf(logo));
+                try {
+                    logo.click();
+                    System.out.println("Log is not clickable.");
+                } catch (Exception e){
+                    System.out.println("Logo is not clickable, as expected.");
+                }
+                assertURL(url);
+                List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+                Assert.assertEquals(tabs.size(), 1);
+        } else if (regulation.equalsIgnoreCase("iiroc")){
+            WebDriverWait driverWait = new WebDriverWait(driver, 10);
+            driverWait.until(ExpectedConditions.visibilityOf(logoIiroc));
+            try {
+                logoIiroc.click();
+                System.out.println("Log is not clickable.");
+            } catch (Exception e){
+                System.out.println("Logo is not clickable, as expected.");
+            }
+            assertURL(url);
+            List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+            Assert.assertEquals(tabs.size(), 1);
+        } else if (regulation.equalsIgnoreCase("cysec")){
+            WebDriverWait driverWait = new WebDriverWait(driver, 10);
+            driverWait.until(ExpectedConditions.visibilityOf(logoCysec));
+            try {
+                logoCysec.click();
+                System.out.println("Log is not clickable.");
+            } catch (Exception e){
+                System.out.println("Logo is not clickable, as expected.");
+            }
+            assertURL(url);
+            List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+            Assert.assertEquals(tabs.size(), 1);
         }
     }
 }

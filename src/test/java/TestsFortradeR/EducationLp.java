@@ -16,10 +16,6 @@ import java.io.IOException;
 public class EducationLp extends BaseTestFortradeR {
     String email = TestData.emailGenerator();
     String phoneNumber = TestData.phoneNumberGenerator();
-    String[] errorMessages = {"Please enter all your given first name(s)", "Please enter your last name in alphabetic characters"
-            , "Invalid email format.", "Invalid phone format."};
-    String[] sameNameErrorMsg = {"Your first name must be different from your last name",
-            "Your first name must be different from your last name"};
 
     @BeforeMethod
     public void setUp() {
@@ -43,10 +39,11 @@ public class EducationLp extends BaseTestFortradeR {
     }
 
     @Test
-    public void demoAccountRegistration() {
+    public void demoAccountRegistration() throws IOException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.successfullyRegistration("Testq", "Testa", email, "381", phoneNumber);
         fortradeRPage.assertURL("https://ready.fortrade.com/#chartticket");
+        fortradeRPage.takeScreenshot("Demo account registration - FortradeR");
     }
 
     @Test
@@ -103,5 +100,11 @@ public class EducationLp extends BaseTestFortradeR {
         fortradeRPage.clickElement(fortradeRPage.lastName, "on last name field");
         fortradeRPage.assertSameNameErrorMsgs();
         fortradeRPage.takeScreenshot("Error messages for the same first and last name - FortradeR");
+    }
+    @Test
+    public void checkingForLogoClickability() throws IOException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.checkLogoClickability("https://www.fortrader.com/minilps/en/education/");
+        fortradeRPage.takeScreenshot("Logo is not clickable - FortradeR");
     }
 }
