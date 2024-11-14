@@ -2,6 +2,7 @@ package TestsFortrade;
 
 import Pages.CrmPage;
 import Pages.FortradePage;
+import Pages.FortradeRPage;
 import faker.TestData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -137,5 +138,13 @@ public class EducationLp extends BaseTestFortrade {
         FortradePage fortradePage = new FortradePage(driver);
         fortradePage.checkLogoClickability(regulation, "https://www.fortrade.com/minilps/en/education/" + tag);
         fortradePage.takeScreenshot("Logo is not clickable - " + regulation + " regulation");
+    }
+
+    @Test
+    @Parameters({"regulation"})
+    public void checkForCountryCodeErrorMessage(String regulation) throws IOException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.checkCountryCodeErrorMessage("01852833kdkd");
+        fortradePage.takeScreenshot("Country code error message - " + regulation + " regulation");
     }
 }

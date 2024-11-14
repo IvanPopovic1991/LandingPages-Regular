@@ -72,6 +72,12 @@ public class FortradePage extends BasePage {
     @FindBy(xpath = "//input[@value='I Consent']")
     public WebElement iConsentBtn;
 
+    @FindBy(xpath = "//div[@class='pushcrew-chrome-style-notification pushcrew-chrome-style-notification-safari']")
+    public WebElement popUpNotification;
+
+    @FindBy(xpath = "(//div[@class='errorValidationIn'])[last()]")
+    public WebElement countryCodeErrorMessage;
+
     String[] errorMessages = {"Please enter all your given first name(s)",
             "Please enter your last name in alphabetic characters",
             "Invalid email format.",
@@ -290,5 +296,14 @@ public class FortradePage extends BasePage {
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             Assert.assertEquals(tabs.size(), 1);
         }
+    }
+
+    public void checkCountryCodeErrorMessage(String wrongCountryCodeDataText) {
+        WebDriverWait driverWait = new WebDriverWait(driver, 10);
+        driverWait.until(ExpectedConditions.visibilityOf(popUpNotification));
+        enterCountryCode(wrongCountryCodeDataText);
+        clickElement(phoneNumber, "phone number field");
+        Assert.assertEquals(getTextBy(countryCodeErrorMessage, "country code error message: " + countryCodeErrorMessage.getText())
+                , "Please enter a valid country code");
     }
 }

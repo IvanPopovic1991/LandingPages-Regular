@@ -31,6 +31,9 @@ public class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        WebDriverWait driverWait = new WebDriverWait(driver, 10);
+        driverWait.until(webDriver -> ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState").equals("complete"));
     }
 
     public void clickElement(WebElement element, String log) {
