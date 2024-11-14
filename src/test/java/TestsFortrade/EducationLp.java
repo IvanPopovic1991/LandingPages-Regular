@@ -2,7 +2,7 @@ package TestsFortrade;
 
 import Pages.CrmPage;
 import Pages.FortradePage;
-import Pages.FortradeRPage;
+import Pages.Mailinator;
 import faker.TestData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,6 +19,7 @@ import java.io.IOException;
 public class EducationLp extends BaseTestFortrade {
     String email = TestData.emailGenerator();
     String phoneNumber = TestData.phoneNumberGenerator();
+    String registeredEmail = email;
 
     @Test
     @Parameters({"regulation", "tag"})
@@ -146,5 +147,14 @@ public class EducationLp extends BaseTestFortrade {
         FortradePage fortradePage = new FortradePage(driver);
         fortradePage.checkCountryCodeErrorMessage("01852833kdkd");
         fortradePage.takeScreenshot("Country code error message - " + regulation + " regulation");
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void emailIsReceivedSuccessfully(String regulation) throws IOException, AWTException{
+        driver.get("https://www.mailinator.com/");
+        Mailinator mailinator = new Mailinator(driver);
+        mailinator.findEmail(registeredEmail);
+        mailinator.zoomOutMethod();
+        mailinator.takeScreenshot("Email is received successfully - " + regulation + " regulation",mailinator.emailTitle);
     }
 }

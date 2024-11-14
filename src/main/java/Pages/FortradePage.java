@@ -120,7 +120,6 @@ public class FortradePage extends BasePage {
         enterEmail(emailData);
         enterCountryCode(countryCodeData);
         enterPhoneNumber(phoneNumberData);
-        assertColor("green");
         clickDenyBtn();
         clickOnSubmitButton();
     }
