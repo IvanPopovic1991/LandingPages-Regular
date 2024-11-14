@@ -9,7 +9,7 @@
         <classes>
             <class name="TestsFortradeR.EducationLp">
                 <methods>
-                    <include name="demoAccountRegistration"/>
+                    <include name="checkForCountryCodeErrorMessage"/>
                 </methods>
             </class>
         </classes>

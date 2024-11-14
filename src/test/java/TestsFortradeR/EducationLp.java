@@ -107,4 +107,10 @@ public class EducationLp extends BaseTestFortradeR {
         fortradeRPage.checkLogoClickability("https://www.fortrader.com/minilps/en/education/");
         fortradeRPage.takeScreenshot("Logo is not clickable - FortradeR");
     }
+    @Test
+    public void checkForCountryCodeErrorMessage() throws IOException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.checkCountryCodeErrorMessage("01852833kdkd");
+        fortradeRPage.takeScreenshot("Country code error message - FortradeR");
+    }
 }

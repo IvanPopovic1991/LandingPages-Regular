@@ -12,7 +12,7 @@
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="demoAccountRegistration"/>
+                    <include name="checkForCountryCodeErrorMessage"/>
                 </methods>
             </class>
         </classes>
@@ -24,7 +24,7 @@
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="demoAccountRegistration"/>
+                    <include name="checkForCountryCodeErrorMessage"/>
                 </methods>
             </class>
         </classes>
@@ -36,7 +36,7 @@
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="demoAccountRegistration"/>
+                    <include name="checkForCountryCodeErrorMessage"/>
                 </methods>
             </class>
         </classes>
@@ -48,7 +48,7 @@
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="demoAccountRegistration"/>
+                    <include name="checkForCountryCodeErrorMessage"/>
                 </methods>
             </class>
         </classes>

@@ -10,8 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,26 +21,32 @@ public class FortradeRPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public @FindBy(id = "FirstName")
-    WebElement firstName;
+    @FindBy(id = "FirstName")
+    public WebElement firstName;
 
-    public @FindBy(id = "LastName")
-    WebElement lastName;
+    @FindBy(id = "LastName")
+    public WebElement lastName;
 
-    public @FindBy(xpath = "(//div[@class='LcWidgetTopWrapper ClField-Email lcFieldWrapper']//input[@name='Email'])[position()=2]")
-    WebElement email;
+    @FindBy(xpath = "(//div[@class='LcWidgetTopWrapper ClField-Email lcFieldWrapper']//input[@name='Email'])[position()=2]")
+    public WebElement email;
 
-    public @FindBy(xpath = "//input[@name='PhoneCountryCode']")
-    WebElement countryCode;
+    @FindBy(xpath = "//input[@name='PhoneCountryCode']")
+    public WebElement countryCode;
 
-    public @FindBy(xpath = "//div[@class='phoneWrapper']//input[@placeholder='Phone']")
-    WebElement phoneNumber;
+    @FindBy(xpath = "//div[@class='phoneWrapper']//input[@placeholder='Phone']")
+    public WebElement phoneNumber;
 
-    public @FindBy(xpath = "//input[@class='Send-Button']")
-    WebElement submitButton;
+    @FindBy(xpath = "//input[@class='Send-Button']")
+    public WebElement submitButton;
 
-    public @FindBy(xpath = "//div[@class='userExistsLabelInner']")
-    WebElement alrdRegEmailPopUp;
+    @FindBy(xpath = "//div[@class='userExistsLabelInner']")
+    public WebElement alrdRegEmailPopUp;
+
+    @FindBy(xpath = "(//div[@class='errorValidationIn'])[last()]")
+    public WebElement countryCodeErrorMessage;
+
+    @FindBy(xpath = "//header/a/div[@class='logo']")
+    public WebElement fortradeLogo;
 
     String[] errorMessages = {"Please enter all your given first name(s)",
             "Please enter your last name in alphabetic characters",
@@ -49,9 +55,6 @@ public class FortradeRPage extends BasePage {
 
     String[] sameNamesErrorMessages = {"Your first name must be different from your last name",
             "Your first name must be different from your last name"};
-
-    public @FindBy(xpath = "//header/a/div[@class='logo']")
-    WebElement fortradeLogo;
 
     public void enterFirstName(String firstNameData) {
         typeText(firstName, firstNameData, "first name");
@@ -181,5 +184,32 @@ public class FortradeRPage extends BasePage {
         assertURL(url);
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         Assert.assertEquals(tabs.size(), 1);
+    }
+    /*
+    This method accept instance of Robot class and text. It breaks String to a character, call the method for convert
+     a character into a number (keyCode) and type one by one character into the field (for example click on field and call
+      this typeString method)
+     */
+    public void typeString(Robot robot, String text) {
+        for (char c : text.toCharArray()) {
+            int keyCode = KeyEvent.getExtendedKeyCodeForChar(c);
+            if (KeyEvent.CHAR_UNDEFINED != keyCode) {
+                robot.keyPress(keyCode);
+                robot.keyRelease(keyCode);
+            }
+        }
+    }
+
+    public void checkCountryCodeErrorMessage(String wrongCountryCodeDataText){
+        clickElement(countryCode, "country code field");
+        try {
+            Robot robot = new Robot();
+            typeString(robot, wrongCountryCodeDataText);
+            clickElement(phoneNumber, "phone number field");
+            Assert.assertEquals(getTextBy(countryCodeErrorMessage, "country code error message: " + countryCodeErrorMessage.getText())
+                    , "Please enter a valid country code");
+        } catch (Exception e){
+            System.out.println(e);
+        }
     }
 }
