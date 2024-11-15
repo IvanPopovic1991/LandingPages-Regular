@@ -86,6 +86,60 @@ public class FortradePage extends BasePage {
     String[] sameNamesErrorMessages = {"Your first name must be different from your last name",
             "Your first name must be different from your last name"};
 
+    // Privacy Policy document link - all regulations
+    String privacyPolicyFSC = "https://www.fortrade.com/fortrade-ma-privacy-policy/" ;
+    String privacyPolicyFCA = "https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Privacy_Policy.pdf" ;
+    String privacyPolicyIiroc = "https://www.fortrade.com/wp-content/uploads/legal/IIROC/Privacy_Policy.pdf" ;
+    String privacyPolicyCysec = "https://www.fortrade.com/wp-content/uploads/legal/CySEC/Privacy_Policy.pdf" ;
+
+    // Terms and conditions document link - all regulation
+    String termsAndConditionsFSC = "https://www.fortrade.com/fortrade-mauritius-client-agreement/";
+    String termsAndConditionsFCA = "https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Terms_and_Conditions.pdf";
+    String termsAndConditionsIiroc = "https://www.fortrade.com/wp-content/uploads/legal/IIROC/Client_Agreement.pdf";
+    String termsAndConditionsCysec = "https://www.fortrade.com/wp-content/uploads/legal/CySEC/Client_Agreement.pdf";
+
+    /*How to unsubscribe document link - same for all regulations.
+    Iiroc regulation doesn't have the How to unsubscribe document*/
+    String howToUnsubscribe = "https://www.fortrade.com/wp-content/uploads/legal/How_to_guides/How_to_unsubscribe.pdf";
+
+    // Already have an account
+    String alrHaveAccount= "https://ready.fortrade.com/?lang=en#login";
+
+    // Risk Warning document link - all regulations
+    String riskWarningFSC = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Risk_Disclosure.pdf";
+    String riskWarningFCA = "https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Risk_Disclosure.pdf";
+    String riskWarningIiroc = "https://www.fortrade.com/wp-content/uploads/legal/IIROC/Relationship_Disclosure.pdf";
+    String riskWarningCysec = "https://www.fortrade.com/wp-content/uploads/legal/CySEC/Risk_Disclosure.pdf";
+    String riskWarningAsic = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Product_Disclosure_Statement-ASIC.pdf";
+
+    // Privacy policy document link in the footer - FSC and Asic regulations;
+    String privacyPolicyFooterFSC = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Privacy_Policy.pdf";
+    String privacyPolicyFooterAsic = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Privacy_Policy-ASIC.pdf";
+
+    // Financial Conduct Authority (FCA) link
+    String fcaLink = "https://register.fca.org.uk/s/firm?id=001b000000NMdUwAAL";
+
+    // Canadian Investment Regulatory Organization (CIRO) link
+    String iirocLink = "https://www.ciro.ca/investors/choosing-investment-advisor/dealers-we-regulate/fortrade-canada-limited";
+
+    // Australian Securities and Investments Commission (ASIC) link
+    String asicLink = "https://connectonline.asic.gov.au/RegistrySearch/faces/landing/panelSearch.jspx?searchType=OrgAndBusNm&searchText=614683831";
+
+    // Cyprus Securities and Exchange Commission (CySEC) link
+    String cysecLink = "https://www.cysec.gov.cy/en-GB/entities/investment-firms/cypriot/86639/";
+
+    // Financial Services Commission, Mauritius (FSC) link
+    String fscLink = "https://www.fscmauritius.org/en/supervision/register-of-licensees/register-of-licensees-details?licence_no=GB21026472&key=&cat=_GB&code=";
+
+    // Asic regulation - financial service guide document link
+    String fsgDocumentLink = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Financial_Services_Guide-ASIC.pdf";
+
+    // Asic regulation - product disclosure statement document link
+    String pdsDocumentLink = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Product_Disclosure_Statement-ASIC.pdf";
+
+    // Asic regulation - target market determination document link
+    String tmdDocumentation = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU-TMD_Policy.pdf";
+
     public void enterFirstName(String firstNameData) {
         typeText(firstName, firstNameData, "first name");
     }
