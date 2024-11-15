@@ -56,6 +56,24 @@ public class FortradeRPage extends BasePage {
     String[] sameNamesErrorMessages = {"Your first name must be different from your last name",
             "Your first name must be different from your last name"};
 
+    // Privacy Policy document link
+    String privacyPolicyFSC = "https://www.fortrade.com/fortrade-ma-privacy-policy/?_gl=1*8yo8mh*_gcl_au*NTM4NzM5MTguMTczMTY2ODA4Nw.." ;
+
+    // Terms and conditions document link
+    String termsAndConditionsFSC = "https://www.fortrade.com/fortrade-mauritius-client-agreement/?_gl=1*157f4jh*_gcl_au*NTM4NzM5MTguMTczMTY2ODA4Nw..";
+
+    //How to unsubscribe document link
+    String howToUnsubscribe = "https://www.fortrade.com/wp-content/uploads/legal/How_to_guides/How_to_unsubscribe.pdf?_gl=1*1obpeca*_gcl_au*NTM4NzM5MTguMTczMTY2ODA4Nw..";
+
+    // Already have an account link
+    String alrHaveAccount = "https://pro.fortrade.com/?language=EN#login";
+
+    // Privacy policy document Footer link
+    String privacyPolicyFSCFooter = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Privacy_Policy.pdf?_gl=1*8yo8mh*_gcl_au*NTM4NzM5MTguMTczMTY2ODA4Nw..";
+
+    // Financial Services Commission, Mauritius (FSC) link
+    String fscLink = "https://www.fscmauritius.org/en/supervision/register-of-licensees/register-of-licensees-details?licence_no=GB21026472&key=&cat=_GB&code=";
+
     public void enterFirstName(String firstNameData) {
         typeText(firstName, firstNameData, "first name");
     }
