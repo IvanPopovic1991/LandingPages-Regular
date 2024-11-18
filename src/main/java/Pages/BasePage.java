@@ -267,4 +267,30 @@ public class BasePage {
             System.out.println("Right click on " + log);
         }
     }
+    /*
+    returnDisplayedElement method accept By parameter and list all By locators and store them into WebElement
+    elements. Checks all elements and return that element which is displayed on the page. If first time fails to find
+    an element, it tries maximum 5 times.
+     */
+    public WebElement returnDisplayedElement(By element) {
+        int retries = 5;
+        int delay = 1000; // 1 second
+
+        for (int i = 0; i < retries; i++) {
+            try {
+                // Check for element visibility
+                List<WebElement> elements = driver.findElements(element);
+                for (WebElement displayedElement : elements) {
+                    if (displayedElement.isDisplayed()) {
+                        return displayedElement;
+                    }
+                }
+                // If element not found, pause briefly and try again
+                Thread.sleep(delay);
+            } catch (Exception e) {
+                System.out.println("Retrying to find element: " + e.getMessage());
+            }
+        }
+        return null; // Return null if not found after retries
+    }
 }

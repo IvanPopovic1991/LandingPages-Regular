@@ -12,13 +12,12 @@
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="demoAccountRegistration"/>
-                    <include name="emailIsReceivedSuccessfully"/>
+                    <include name="privacyPolicyTest"/>
                 </methods>
             </class>
         </classes>
     </test>
-<test name="Demo Account Registration - FCA Regulation">
+<!--<test name="Demo Account Registration - FCA Regulation">
         <parameter name="regulation" value="FCA"/>
         <parameter name="tag" value="?tg=skip&amp;G_GEO=1006453&amp;regulation=FCA"/>
     <parameter name="countryCode" value="44"/>
@@ -56,7 +55,7 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 <!--     Currently restricted-->
 <!--    <test name="Demo Account Registration - Cysec Regulation">-->
 <!--        <parameter name="countryCode" value="357"/>-->

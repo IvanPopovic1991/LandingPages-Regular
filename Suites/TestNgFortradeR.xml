@@ -9,8 +9,7 @@
         <classes>
             <class name="TestsFortradeR.EducationLp">
                 <methods>
-                    <include name="demoAccountRegistration"/>
-                    <include name="emailIsReceivedSuccessfully"/>
+                    <include name="links"/>
                 </methods>
             </class>
         </classes>
