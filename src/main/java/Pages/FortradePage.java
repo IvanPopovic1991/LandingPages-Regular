@@ -78,6 +78,29 @@ public class FortradePage extends BasePage {
     @FindBy(xpath = "(//div[@class='errorValidationIn'])[last()]")
     public WebElement countryCodeErrorMessage;
 
+    public By privacyPolicyLinkBy = By.xpath("//div[@class='form-wrapper']//a[text()='Privacy Policy']");
+    public By termsAndConditionsLinkBy = By.xpath("//div[@class='form-wrapper']//a[contains(text(), 'Terms and Conditions')]");
+    public By clickHereLinkBy = By.xpath("//div[@class='MarketingMaterials2']//a[text()='click here']");
+    public By alreadyHaveAnAccountLinkBy = By.xpath("//*[@class='alreadyHaveAcc']//a[contains(text(), 'Already have an account?')]");
+    public By contactUsLinkBy = By.xpath("//*[@class='needHelp']//a[text()='Contact Us']");
+
+    public By facebookLinkBy = By.xpath("//a[@href='https://www.facebook.com/Fortrade.International']");
+    public By instagramLinkBy = By.xpath("//a[@href='https://www.instagram.com/fortrade_online_trading/?hl=en']");
+    public By youtubeLinkBy = By.xpath("//a[@href='https://www.youtube.com/channel/UCNCrGhrDTEN1Hx_20-kFxwg']");
+
+    public By infoLinkBy = By.xpath("//div[@class='col-md-12 text-center']//a[text()='info@fortrade.com']");
+    public By supportLinkBy = By.xpath("//a[text()='support@fortrade.com']");
+    public By footerRiskWarningLinkBy = By.xpath("//div[@class='footerRiskDisclaimer']//a[contains(text(), 'Risk warning')]");
+    public By footerPrivacyPolicyLinkBy = By.xpath("//div[@class='footerRiskDisclaimer']//a[contains(text(), 'Privacy policy')]");
+    public By footerPrivacyPolicyFortradeRLinkBy = By.xpath("//div[@class='fscClass']//a[contains(text(), 'Privacy policy')]");
+
+    public By fcaRegulationLinkBy = By.xpath("//a[text()='FRN: 609970']");
+    public By ciroRegulationLinkBy = By.xpath("//a[text()='CRN: BC1148613']");
+    public By asicRegulationLinkBy = By.xpath("//a[text()='ABN: 33 614 683 831 | AFSL: 493520']");
+    public By cysecRegulationLinkBy = By.xpath("//a[text()='CIF license number 385/20']");
+    public By fscRegulationLinkBy = By.xpath("//a[text()=' GB21026472']");
+
+
     String[] errorMessages = {"Please enter all your given first name(s)",
             "Please enter your last name in alphabetic characters",
             "Invalid email format.",
@@ -87,58 +110,82 @@ public class FortradePage extends BasePage {
             "Your first name must be different from your last name"};
 
     // Privacy Policy document link - all regulations
-    String privacyPolicyFSC = "https://www.fortrade.com/fortrade-ma-privacy-policy/" ;
-    String privacyPolicyFCA = "https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Privacy_Policy.pdf" ;
-    String privacyPolicyIiroc = "https://www.fortrade.com/wp-content/uploads/legal/IIROC/Privacy_Policy.pdf" ;
-    String privacyPolicyCysec = "https://www.fortrade.com/wp-content/uploads/legal/CySEC/Privacy_Policy.pdf" ;
+public String privacyPolicyFSC = "https://www.fortrade.com/fortrade-ma-privacy-policy/" ;
+public String privacyPolicyFCA = "https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Privacy_Policy.pdf" ;
+public String privacyPolicyIiroc = "https://www.fortrade.com/wp-content/uploads/legal/IIROC/Privacy_Policy.pdf" ;
+public String privacyPolicyCysec = "https://www.fortrade.com/wp-content/uploads/legal/CySEC/Privacy_Policy.pdf" ;
+
+    public String setRegulation(String regulation){
+        String text = "";
+        switch (regulation){
+            case "FSC": {
+                text = "fortrade-ma-privacy-policy/";
+            }
+                break;
+            case "FCA": {
+                text = "wp-content/uploads/legal/Fortrade_Privacy_Policy.pdf";
+            }
+            break;
+            case "iiroc": {
+                text = "wp-content/uploads/legal/IIROC/Privacy_Policy.pdf";
+            }
+            break;
+            case "cysec": {
+                text = "wp-content/uploads/legal/CySEC/Privacy_Policy.pdf";
+            }
+            break;
+        }
+        String privacyPolicy = "https://www.fortrade.com/" + text;
+        return privacyPolicy;
+    }
 
     // Terms and conditions document link - all regulation
-    String termsAndConditionsFSC = "https://www.fortrade.com/fortrade-mauritius-client-agreement/";
-    String termsAndConditionsFCA = "https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Terms_and_Conditions.pdf";
-    String termsAndConditionsIiroc = "https://www.fortrade.com/wp-content/uploads/legal/IIROC/Client_Agreement.pdf";
-    String termsAndConditionsCysec = "https://www.fortrade.com/wp-content/uploads/legal/CySEC/Client_Agreement.pdf";
+public String termsAndConditionsFSC = "https://www.fortrade.com/fortrade-mauritius-client-agreement/";
+public String termsAndConditionsFCA = "https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Terms_and_Conditions.pdf";
+public String termsAndConditionsIiroc = "https://www.fortrade.com/wp-content/uploads/legal/IIROC/Client_Agreement.pdf";
+public String termsAndConditionsCysec = "https://www.fortrade.com/wp-content/uploads/legal/CySEC/Client_Agreement.pdf";
 
     /*How to unsubscribe document link - same for all regulations.
     Iiroc regulation doesn't have the How to unsubscribe document*/
-    String howToUnsubscribe = "https://www.fortrade.com/wp-content/uploads/legal/How_to_guides/How_to_unsubscribe.pdf";
+public String howToUnsubscribe = "https://www.fortrade.com/wp-content/uploads/legal/How_to_guides/How_to_unsubscribe.pdf";
 
     // Already have an account
-    String alrHaveAccount= "https://ready.fortrade.com/?lang=en#login";
+public String alrHaveAccount= "https://ready.fortrade.com/?lang=en#login";
 
     // Risk Warning document link - all regulations
-    String riskWarningFSC = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Risk_Disclosure.pdf";
-    String riskWarningFCA = "https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Risk_Disclosure.pdf";
-    String riskWarningIiroc = "https://www.fortrade.com/wp-content/uploads/legal/IIROC/Relationship_Disclosure.pdf";
-    String riskWarningCysec = "https://www.fortrade.com/wp-content/uploads/legal/CySEC/Risk_Disclosure.pdf";
-    String riskWarningAsic = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Product_Disclosure_Statement-ASIC.pdf";
+public String riskWarningFSC = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Risk_Disclosure.pdf";
+public String riskWarningFCA = "https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Risk_Disclosure.pdf";
+public String riskWarningIiroc = "https://www.fortrade.com/wp-content/uploads/legal/IIROC/Relationship_Disclosure.pdf";
+public String riskWarningCysec = "https://www.fortrade.com/wp-content/uploads/legal/CySEC/Risk_Disclosure.pdf";
+public String riskWarningAsic = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Product_Disclosure_Statement-ASIC.pdf";
 
     // Privacy policy document link in the footer - FSC and Asic regulations;
-    String privacyPolicyFooterFSC = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Privacy_Policy.pdf";
-    String privacyPolicyFooterAsic = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Privacy_Policy-ASIC.pdf";
+public String privacyPolicyFooterFSC = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Privacy_Policy.pdf";
+public String privacyPolicyFooterAsic = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Privacy_Policy-ASIC.pdf";
 
     // Financial Conduct Authority (FCA) link
-    String fcaLink = "https://register.fca.org.uk/s/firm?id=001b000000NMdUwAAL";
+public String fcaLink = "https://register.fca.org.uk/s/firm?id=001b000000NMdUwAAL";
 
     // Canadian Investment Regulatory Organization (CIRO) link
-    String iirocLink = "https://www.ciro.ca/investors/choosing-investment-advisor/dealers-we-regulate/fortrade-canada-limited";
+public String iirocLink = "https://www.ciro.ca/investors/choosing-investment-advisor/dealers-we-regulate/fortrade-canada-limited";
 
     // Australian Securities and Investments Commission (ASIC) link
-    String asicLink = "https://connectonline.asic.gov.au/RegistrySearch/faces/landing/panelSearch.jspx?searchType=OrgAndBusNm&searchText=614683831";
+public String asicLink = "https://connectonline.asic.gov.au/RegistrySearch/faces/landing/panelSearch.jspx?searchType=OrgAndBusNm&searchText=614683831";
 
     // Cyprus Securities and Exchange Commission (CySEC) link
-    String cysecLink = "https://www.cysec.gov.cy/en-GB/entities/investment-firms/cypriot/86639/";
+public String cysecLink = "https://www.cysec.gov.cy/en-GB/entities/investment-firms/cypriot/86639/";
 
     // Financial Services Commission, Mauritius (FSC) link
-    String fscLink = "https://www.fscmauritius.org/en/supervision/register-of-licensees/register-of-licensees-details?licence_no=GB21026472&key=&cat=_GB&code=";
+public String fscLink = "https://www.fscmauritius.org/en/supervision/register-of-licensees/register-of-licensees-details?licence_no=GB21026472&key=&cat=_GB&code=";
 
     // Asic regulation - financial service guide document link
-    String fsgDocumentLink = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Financial_Services_Guide-ASIC.pdf";
+public String fsgDocumentLink = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Financial_Services_Guide-ASIC.pdf";
 
     // Asic regulation - product disclosure statement document link
-    String pdsDocumentLink = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Product_Disclosure_Statement-ASIC.pdf";
+public String pdsDocumentLink = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU_Product_Disclosure_Statement-ASIC.pdf";
 
     // Asic regulation - target market determination document link
-    String tmdDocumentation = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU-TMD_Policy.pdf";
+public String tmdDeterminationLink = "https://www.fortrade.com/wp-content/uploads/legal/ASIC/Fort_Securities_AU-TMD_Policy.pdf";
 
     public void enterFirstName(String firstNameData) {
         typeText(firstName, firstNameData, "first name");
@@ -358,5 +405,23 @@ public class FortradePage extends BasePage {
         clickElement(phoneNumber, "phone number field");
         Assert.assertEquals(getTextBy(countryCodeErrorMessage, "country code error message: " + countryCodeErrorMessage.getText())
                 , "Please enter a valid country code");
+    }
+    public void clickOnSelectedLink(By element, String url, String regulation) throws IOException, AWTException {
+        WebElement displayedElement = returnDisplayedElement(element);
+        if (displayedElement != null) {
+            clickElement(displayedElement, "link " + displayedElement.getText());
+        } else {
+            System.out.println("Element is not found!");
+        }
+        List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        assertURL(url);
+        takeScreenshot("Privacy Policy document - " + regulation + " regulation");
+        driver.close();
+        driver.switchTo().window(tabs.get(0));
+    }
+
+    public void rightClickOnSelectedLink(By element, String url) {
+        performRightClick(returnDisplayedElement(element), url, "link" + returnDisplayedElement(element).getText());
     }
 }

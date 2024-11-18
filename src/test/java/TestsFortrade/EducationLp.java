@@ -157,4 +157,11 @@ public class EducationLp extends BaseTestFortrade {
         mailinator.zoomOutMethod();
         mailinator.takeScreenshot("Email is received successfully - " + regulation + " regulation",mailinator.emailTitle);
     }
+    @Test
+    @Parameters({"regulation"})
+    public void privacyPolicyTest(String regulation) throws IOException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickOnSelectedLink(fortradePage.privacyPolicyLinkBy, fortradePage.setRegulation(regulation), regulation);
+        fortradePage.rightClickOnSelectedLink(fortradePage.privacyPolicyLinkBy, fortradePage.setRegulation(regulation));
+    }
 }

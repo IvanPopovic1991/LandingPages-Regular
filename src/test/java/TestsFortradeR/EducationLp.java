@@ -123,4 +123,10 @@ public class EducationLp extends BaseTestFortradeR {
         mailinator.zoomOutMethod();
         mailinator.takeScreenshot("Email is received successfully - FortradeR",mailinator.emailTitle);
     }
+    @Test
+    public void links(){
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.privacyPolicyLinkBy, fortradeRPage.privacyPolicyFSC);
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.privacyPolicyLinkBy, fortradeRPage.privacyPolicyFSC);
+    }
 }
