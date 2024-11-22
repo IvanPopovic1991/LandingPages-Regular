@@ -21,7 +21,7 @@ public class EducationLp extends BaseTestFortradeR {
 
     @BeforeMethod
     public void setUp() {
-        baseSetup("Chrome", "130");
+        baseSetup("Chrome", "131");
     }
 
     @AfterMethod
@@ -124,9 +124,75 @@ public class EducationLp extends BaseTestFortradeR {
         mailinator.takeScreenshot("Email is received successfully - FortradeR",mailinator.emailTitle);
     }
     @Test
-    public void links(){
+    public void privacyPolicyTest() throws IOException, AWTException, InterruptedException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
-        fortradeRPage.clickOnSelectedLink(fortradeRPage.privacyPolicyLinkBy, fortradeRPage.privacyPolicyFSC);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.privacyPolicyLinkBy, fortradeRPage.privacyPolicyFSC,
+                "Privacy policy");
         fortradeRPage.rightClickOnSelectedLink(fortradeRPage.privacyPolicyLinkBy, fortradeRPage.privacyPolicyFSC);
+    }
+
+    @Test
+    public void termsAndConditionsTest() throws IOException, AWTException, InterruptedException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.termsAndConditionsLinkBy,fortradeRPage.termsAndConditionsFSC,
+                "Terms and conditions");
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.termsAndConditionsLinkBy,fortradeRPage.termsAndConditionsFSC);
+    }
+
+    @Test
+    public void howToUnsubscribeTest() throws IOException, AWTException, InterruptedException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.clickHereLinkBy,fortradeRPage.howToUnsubscribeURL,
+                "How to unsubscribe");
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.clickHereLinkBy, fortradeRPage.howToUnsubscribeURL);
+    }
+
+    @Test
+    public void loginRedirectionTest() throws IOException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.loginRedirection();
+        if(driver.getCurrentUrl().contains(fortradeRPage.alrHaveAccount)){
+            fortradeRPage.takeScreenshot("Login page - the user is successfully redirected",fortradeRPage.loginToFortrade);
+        }else{
+            System.out.println("Wrong link redirection");
+        }
+    }
+
+    @Test
+    public void footerPrivacyPolicy() throws IOException, InterruptedException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='fscClass']//a[contains" +
+                "(text(), 'Privacy policy')]")));
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.footerPrivacyPolicyLinkBy,fortradeRPage.privacyPolicyFSCFooter,
+                "Privacy policy footer - FortradeR");
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.footerPrivacyPolicyLinkBy,fortradeRPage.privacyPolicyFSCFooter);
+    }
+    @Test
+    public void fscRegulationTest() throws IOException, InterruptedException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.scrollToAnElement(driver.findElement(By.xpath("//a[text()=' GB21026472']")));
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.fscRegulationLinkBy,fortradeRPage.fscLink,
+                "Financial Services Commission page");
+        fortradeRPage.scrollToAnElement(driver.findElement(By.xpath("//a[text()=' GB21026472']")));
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.fscRegulationLinkBy,fortradeRPage.fscLink);
+    }
+
+    @Test
+    public void fbLinkRedirection() throws IOException, InterruptedException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.facebookLinkBy,fortradeRPage.fbURL,"Facebook page");
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.facebookLinkBy,fortradeRPage.fbURL);
+    }
+    @Test
+    public void insLinkRedirection() throws IOException, InterruptedException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.instagramLinkBy,fortradeRPage.insURL,"Instagram page");
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.instagramLinkBy,fortradeRPage.insURL);
+    }
+    @Test
+    public void ytLinkRedirection() throws IOException, InterruptedException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.youtubeLinkBy,fortradeRPage.ytURL,"Youtube page");
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.youtubeLinkBy,fortradeRPage.ytURL);
     }
 }

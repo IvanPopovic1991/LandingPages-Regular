@@ -8,10 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -25,7 +22,7 @@ public class EducationLp extends BaseTestFortrade {
     @Parameters({"regulation", "tag"})
     @BeforeMethod
     public void setUp(String regulation, String tag) {
-        baseSetup("Chrome", "130");
+        baseSetup("Chrome", "131");
         driver.get("https://www.fortrade.com/minilps/en/education/" + tag);
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(webDriver -> ((JavascriptExecutor) webDriver)
@@ -159,9 +156,178 @@ public class EducationLp extends BaseTestFortrade {
     }
     @Test
     @Parameters({"regulation"})
-    public void privacyPolicyTest(String regulation) throws IOException, AWTException {
+    public void privacyPolicyTest(String regulation) throws IOException, AWTException, InterruptedException {
         FortradePage fortradePage = new FortradePage(driver);
-        fortradePage.clickOnSelectedLink(fortradePage.privacyPolicyLinkBy, fortradePage.setRegulation(regulation), regulation);
+        fortradePage.clickOnSelectedLink(fortradePage.privacyPolicyLinkBy, fortradePage.setRegulation(regulation),
+                "Privacy policy" ,regulation);
         fortradePage.rightClickOnSelectedLink(fortradePage.privacyPolicyLinkBy, fortradePage.setRegulation(regulation));
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void termsAndConditionsTest(String regulation) throws IOException, AWTException, InterruptedException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickOnSelectedLink(fortradePage.termsAndConditionsLinkBy,fortradePage.termsAndCondition(regulation),
+                "Terms and conditions",regulation);
+        fortradePage.rightClickOnSelectedLink(fortradePage.termsAndConditionsLinkBy,fortradePage.termsAndCondition(regulation));
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void howToUnsubscribeTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickOnSelectedLink(fortradePage.clickHereLink,fortradePage.howToUnsubscribeURL,"How to unsubscribe",regulation);
+        fortradePage.rightClickOnSelectedLink(fortradePage.clickHereLink,fortradePage.howToUnsubscribeURL);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void loginRedirectionTest(String regulation) throws IOException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.loginRedirection(regulation);
+        if(driver.getCurrentUrl().contains(fortradePage.alrHaveAccount)){
+            fortradePage.takeScreenshot("Login page - the user is successfully redirected " + regulation +
+                    " regulation",fortradePage.loginToFotrade);
+        }else{
+            System.out.println("Wrong link redirection");
+        }
+    }
+
+    @Test
+    @Parameters({"regulation"})
+    public void riskWarningTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='footerRiskDisclaimer']" +
+                "//a[contains(text(),'Risk warning')]")));
+        fortradePage.clickOnSelectedLink(fortradePage.footerRiskWarningLinkBy,fortradePage.riskWarning(regulation),
+                "Risk warning",regulation);
+        fortradePage.rightClickOnSelectedLink(fortradePage.footerRiskWarningLinkBy,fortradePage.riskWarning(regulation));
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void footerPrivacyPolicy(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='fscClass']//a[contains" +
+                "(text(), 'Privacy policy')]")));
+        fortradePage.clickOnSelectedLink(fortradePage.footerPrivacyPolicyLinkBy,fortradePage.footerPrivacyPolicy(regulation),
+                "Privacy policy - footer",regulation);
+        fortradePage.rightClickOnSelectedLink(fortradePage.footerPrivacyPolicyLinkBy,fortradePage.footerPrivacyPolicy(regulation));
+        }
+    @Test
+    @Parameters({"regulation"})
+    public void fcaRegulationTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()='FRN: 609970']")));
+        fortradePage.clickOnSelectedLink(fortradePage.fcaRegulationLinkBy,fortradePage.fcaLink,
+                "Financial conduct authority page",regulation);
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()='FRN: 609970']")));
+        fortradePage.rightClickOnSelectedLink(fortradePage.fcaRegulationLinkBy,fortradePage.fcaLink);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void iirocRegulationTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()='CRN: BC1148613']")));
+        fortradePage.clickOnSelectedLink(fortradePage.ciroRegulationLinkBy,fortradePage.iirocLink,
+                "Canadian Investment Regulatory Organization page",regulation);
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()='CRN: BC1148613']")));
+        fortradePage.rightClickOnSelectedLink(fortradePage.ciroRegulationLinkBy,fortradePage.iirocLink);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void asicRegulationTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()='ABN: 33 614 683 831 | AFSL: 493520']")));
+        fortradePage.clickOnSelectedLink(fortradePage.asicRegulationLinkBy,fortradePage.asicLink,
+                "Australian Securities and Investments Commission page",regulation);
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()='ABN: 33 614 683 831 | AFSL: 493520']")));
+        fortradePage.rightClickOnSelectedLink(fortradePage.asicRegulationLinkBy,fortradePage.asicLink);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void cysecRegulationTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()='CIF license number 385/20']")));
+        fortradePage.clickOnSelectedLink(fortradePage.cysecRegulationLinkBy,fortradePage.cysecLink,
+                "Cyprus Securities and Exchange Commission page",regulation);
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()='CIF license number 385/20']")));
+        fortradePage.rightClickOnSelectedLink(fortradePage.cysecRegulationLinkBy,fortradePage.cysecLink);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void fscRegulationTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()=' GB21026472']")));
+        fortradePage.clickOnSelectedLink(fortradePage.fscRegulationLinkBy,fortradePage.fscLink,
+                "Financial Services Commission page",regulation);
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//a[text()=' GB21026472']")));
+        fortradePage.rightClickOnSelectedLink(fortradePage.fscRegulationLinkBy,fortradePage.fscLink);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void fsgDocumentTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='footerRiskDisclaimer']" +
+                "//div[@class='asicClass']//a[contains(text(),'(FSG)')]")));
+        fortradePage.clickOnSelectedLink(fortradePage.fsgDocument,fortradePage.fsgDocumentLink,
+                "Financial Service Guide ",regulation);
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='footerRiskDisclaimer']" +
+                "//div[@class='asicClass']//a[contains(text(),'(TMD)')]")));
+        fortradePage.rightClickOnSelectedLink(fortradePage.fsgDocument,fortradePage.fsgDocumentLink);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void pdsDocumentTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='footerRiskDisclaimer']" +
+                "//div[@class='asicClass']//a[contains(text(),'(PDS)')]")));
+        fortradePage.clickOnSelectedLink(fortradePage.pdsDocument,fortradePage.pdsDocumentLink,
+                "Product Disclosure Statement document",regulation);
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='footerRiskDisclaimer']" +
+                "//div[@class='asicClass']//a[contains(text(),'(PDS)')]")));
+        fortradePage.rightClickOnSelectedLink(fortradePage.pdsDocument,fortradePage.pdsDocumentLink);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void tmdDocumentTest(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='footerRiskDisclaimer']" +
+                "//div[@class='asicClass']//a[contains(text(),'(TMD)')]")));
+        fortradePage.clickOnSelectedLink(fortradePage.tmdDocument,fortradePage.tmdDeterminationLink,
+                "Target Market Determination ",regulation);
+        fortradePage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='footerRiskDisclaimer']" +
+                "//div[@class='asicClass']//a[contains(text(),'(TMD)')]")));
+        fortradePage.rightClickOnSelectedLink(fortradePage.tmdDocument,fortradePage.tmdDeterminationLink);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void fbLinkRedirection(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.clickOnSelectedLink(fortradePage.facebookLinkBy,fortradePage.fbPage(regulation),"Facebook page",regulation);
+        fortradePage.rightClickOnSelectedLink(fortradePage.facebookLinkBy,fortradePage.fbPage(regulation));
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void insLinkRedirection(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.clickOnSelectedLink(fortradePage.instagramLinkBy,fortradePage.insURL,"Instagram page",regulation);
+        fortradePage.rightClickOnSelectedLink(fortradePage.instagramLinkBy,fortradePage.insURL);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void ytLinkRedirection(String regulation) throws IOException, InterruptedException, AWTException {
+        FortradePage fortradePage = new FortradePage(driver);
+        fortradePage.clickDenyBtn();
+        fortradePage.clickOnSelectedLink(fortradePage.youtubeLinkBy,fortradePage.ytURL,"Instagram page",regulation);
+        fortradePage.rightClickOnSelectedLink(fortradePage.youtubeLinkBy,fortradePage.ytURL);
     }
 }

@@ -5,7 +5,7 @@
         <listener class-name="listeners.ScreenshotListener"/>
         <listener class-name="listeners.Transform"/>
     </listeners>
-    <test name="Demo Account Registration - FSC Regulation">
+    <test name="Already have an account link redirection - FSC Regulation">
         <parameter name="regulation" value="FSC"/>
         <parameter name="countryCode" value="381"/>
         <parameter name="tag" value="?tg=skip&amp;G_GEO=2051&amp;regulation=FSC"/>
@@ -13,55 +13,96 @@
             <class name="TestsFortrade.EducationLp">
                 <methods>
                     <include name="privacyPolicyTest"/>
+                    <include name="termsAndConditionsTest"/>
+                    <include name="howToUnsubscribeTest"/>
+                    <include name="loginRedirectionTest"/>
+                    <include name="riskWarningTest"/>
+                    <include name="footerPrivacyPolicy"/>
+                    <include name="fscRegulationTest"/>
+                    <include name="fbLinkRedirection"/>
+                    <include name="insLinkRedirection"/>
+                    <include name="ytLinkRedirection"/>
                 </methods>
             </class>
         </classes>
     </test>
-<!--<test name="Demo Account Registration - FCA Regulation">
+    <test name="Already have an account link redirection - FCA Regulation">
         <parameter name="regulation" value="FCA"/>
         <parameter name="tag" value="?tg=skip&amp;G_GEO=1006453&amp;regulation=FCA"/>
-    <parameter name="countryCode" value="44"/>
+        <parameter name="countryCode" value="44"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="demoAccountRegistration"/>
-                    <include name="emailIsReceivedSuccessfully"/>
+                    <include name="privacyPolicyTest"/>
+                    <include name="termsAndConditionsTest"/>
+                    <include name="howToUnsubscribeTest"/>
+                    <include name="loginRedirectionTest"/>
+                    <include name="riskWarningTest"/>
+                    <include name="footerPrivacyPolicy"/>
+                    <include name="fcaRegulationTest"/>
+                    <include name="fbLinkRedirection"/>
+                    <include name="insLinkRedirection"/>
+                    <include name="ytLinkRedirection"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="Demo Account Registration - Asic Regulation">
-        <parameter name="regulation" value="Asic"/>
-        <parameter name="tag" value="?tg=skip&amp;G_GEO=1000142&amp;regulation=ASIC"/>
-        <parameter name="countryCode" value="61"/>
-        <classes>
-            <class name="TestsFortrade.EducationLp">
-                <methods>
-                    <include name="demoAccountRegistration"/>
-                    <include name="emailIsReceivedSuccessfully"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="Demo Account Registration - Iiroc Regulation">
+        <test name="Already have an account link redirection - Asic Regulation">
+            <parameter name="regulation" value="Asic"/>
+            <parameter name="tag" value="?tg=skip&amp;G_GEO=1000142&amp;regulation=ASIC"/>
+            <parameter name="countryCode" value="61"/>
+            <classes>
+                <class name="TestsFortrade.EducationLp">
+                    <methods>
+                        <include name="loginRedirectionTest"/>
+                        <include name="riskWarningTest"/>
+                        <include name="footerPrivacyPolicy"/>
+                        <include name="asicRegulationTest"/>
+                        <include name="fbLinkRedirection"/>
+                        <include name="insLinkRedirection"/>
+                        <include name="ytLinkRedirection"/>
+                        <include name="fsgDocumentTest"/>
+                        <include name="pdsDocumentTest"/>
+                        <include name="tmdDocumentTest"/>
+                    </methods>
+                </class>
+            </classes>
+        </test>
+    <test name="Already have an account link redirection - Iiroc Regulation">
         <parameter name="regulation" value="iiroc"/>
         <parameter name="tag" value="?tg=skip&amp;G_GEO=9077369&amp;regulation=IIROC"/>
         <parameter name="countryCode" value="1"/>
         <classes>
             <class name="TestsFortrade.EducationLp">
                 <methods>
-                    <include name="demoAccountRegistration"/>
-                    <include name="emailIsReceivedSuccessfully"/>
+                    <include name="loginRedirectionTest"/>
+                    <include name="riskWarningTest"/>
+                    <include name="footerPrivacyPolicy"/>
+                    <include name="iirocRegulationTest"/>
+                    <include name="fbLinkRedirection"/>
+                    <include name="insLinkRedirection"/>
+                    <include name="ytLinkRedirection"/>
                 </methods>
             </class>
         </classes>
-    </test>-->
-<!--     Currently restricted-->
-<!--    <test name="Demo Account Registration - Cysec Regulation">-->
-<!--        <parameter name="countryCode" value="357"/>-->
-<!--        <parameter name="regulation" value="cysec"/>-->
-<!--        <classes>-->
-<!--            <class name="TestsFortrade.EducationLp"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    </test>
+<!--        Demo account registration - Currently restricted-->
+    <test name="Social media links redirection - Cysec Regulation">
+        <parameter name="regulation" value="cysec"/>
+        <parameter name="tag" value="?tg=skip&amp;G_GEO=1000997&amp;regulation=CYSEC"/>
+        <parameter name="countryCode" value="357"/>
+        <classes>
+            <class name="TestsFortrade.EducationLp">
+                <methods>
+                    <include name="loginRedirectionTest"/>
+                    <include name="riskWarningTest"/>
+                    <include name="footerPrivacyPolicy"/>
+                    <include name="cysecRegulationTest"/>
+                    <include name="fbLinkRedirection"/>
+                    <include name="insLinkRedirection"/>
+                    <include name="ytLinkRedirection"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
