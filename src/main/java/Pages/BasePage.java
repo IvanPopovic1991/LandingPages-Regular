@@ -28,10 +28,11 @@ public class BasePage {
      * noSuchElementException gresku.
      * Svaka stranica u svom konstuktoru ce sadrzati page factory.
      */
+    public WebDriverWait driverWait;
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        WebDriverWait driverWait = new WebDriverWait(driver, 10);
+        driverWait = new WebDriverWait(driver, waitTime);
         driverWait.until(webDriver -> ((JavascriptExecutor) webDriver)
                 .executeScript("return document.readyState").equals("complete"));
     }
@@ -172,7 +173,7 @@ public class BasePage {
         BufferedImage screenFullImage = robot.createScreenCapture(screenRect);
 
         // Saving the full screen image
-        ImageIO.write(screenFullImage, "PNG", new File("src/screenshot/" + fileName + ".png"));
+        ImageIO.write(screenFullImage, "PNG", new File("src/screenshot/"+ fileName + ".png"));
     }
 
     public String getText(WebElement element, String log) {
@@ -220,7 +221,8 @@ public class BasePage {
     public void scrollToAnElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
-        js.executeScript("window.scrollBy(0, -200);");
+        js.executeScript("window.scrollBy(0,300);");
+        System.out.println("Scrolled to the " + element.getText());
     }
 
     public void doubleClick(WebElement element, String log) {

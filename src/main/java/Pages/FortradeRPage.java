@@ -48,20 +48,23 @@ public class FortradeRPage extends BasePage {
     @FindBy(xpath = "//header/a/div[@class='logo']")
     public WebElement fortradeLogo;
 
+    @FindBy(xpath = "//div[contains(text(),'Login')]")
+    public WebElement loginToFortrade;
+
     public By privacyPolicyLinkBy = By.xpath("//div[@class='form-wrapper']//a[text()='Privacy Policy']");
     public By termsAndConditionsLinkBy = By.xpath("//div[@class='form-wrapper']//a[contains(text(), 'Terms and Conditions')]");
     public By clickHereLinkBy = By.xpath("//div[@class='MarketingMaterials2']//a[text()='click here']");
     public By alreadyHaveAnAccountLinkBy = By.xpath("//*[@class='alreadyHaveAcc']//a[contains(text(), 'Already have an account?')]");
     public By contactUsLinkBy = By.xpath("//*[@class='needHelp']//a[text()='Contact Us']");
 
-    public By facebookLinkBy = By.xpath("//a[@href='https://www.facebook.com/Fortrade.International']");
+    public By facebookLinkBy = By.xpath("//a[@class='facebook-links']");
     public By instagramLinkBy = By.xpath("//a[@href='https://www.instagram.com/fortrade_online_trading/?hl=en']");
     public By youtubeLinkBy = By.xpath("//a[@href='https://www.youtube.com/channel/UCNCrGhrDTEN1Hx_20-kFxwg']");
 
     public By infoLinkBy = By.xpath("//div[@class='col-md-12 text-center']//a[text()='info@fortrade.com']");
     public By supportLinkBy = By.xpath("//a[text()='support@fortrade.com']");
     public By footerRiskWarningLinkBy = By.xpath("//div[@class='footerRiskDisclaimer']//a[contains(text(), 'Risk warning')]");
-    public By footerPrivacyPolicyLinkBy = By.xpath("//div[@class='footerRiskDisclaimer']//a[contains(text(), 'Privacy policy')]");
+    public By footerPrivacyPolicyLinkBy = By.xpath("//div[@class='fscClass']//a[contains(text(),'Privacy policy')]");
     public By footerPrivacyPolicyFortradeRLinkBy = By.xpath("//div[@class='fscClass']//a[contains(text(), 'Privacy policy')]");
 
     public By fcaRegulationLinkBy = By.xpath("//a[text()='FRN: 609970']");
@@ -80,22 +83,28 @@ public class FortradeRPage extends BasePage {
             "Your first name must be different from your last name"};
 
     // Privacy Policy document link
-    public String privacyPolicyFSC = "https://www.fortrade.com/fortrade-ma-privacy-policy/?_gl=1*8yo8mh*_gcl_au*NTM4NzM5MTguMTczMTY2ODA4Nw..";
+    public String privacyPolicyFSC = "https://www.fortrade.com/fortrade-ma-privacy-policy/";
 
     // Terms and conditions document link
-    public String termsAndConditionsFSC = "https://www.fortrade.com/fortrade-mauritius-client-agreement/?_gl=1*157f4jh*_gcl_au*NTM4NzM5MTguMTczMTY2ODA4Nw..";
+    public String termsAndConditionsFSC = "https://www.fortrade.com/fortrade-mauritius-client-agreement/";
 
     //How to unsubscribe document link
-    public String howToUnsubscribe = "https://www.fortrade.com/wp-content/uploads/legal/How_to_guides/How_to_unsubscribe.pdf?_gl=1*1obpeca*_gcl_au*NTM4NzM5MTguMTczMTY2ODA4Nw..";
+    public String howToUnsubscribeURL = "https://www.fortrade.com/wp-content/uploads/legal/How_to_guides/How_to_unsubscribe.pdf";
 
     // Already have an account link
-    public String alrHaveAccount = "https://pro.fortrade.com/?language=EN#login";
+    public String alrHaveAccount = "https://pro.fortrade.com/";
 
     // Privacy policy document Footer link
-    public String privacyPolicyFSCFooter = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Privacy_Policy.pdf?_gl=1*8yo8mh*_gcl_au*NTM4NzM5MTguMTczMTY2ODA4Nw..";
+    public String privacyPolicyFSCFooter = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Privacy_Policy.pdf";
 
     // Financial Services Commission, Mauritius (FSC) link
     public String fscLink = "https://www.fscmauritius.org/en/supervision/register-of-licensees/register-of-licensees-details?licence_no=GB21026472&key=&cat=_GB&code=";
+
+    public String fbURL = "https://www.facebook.com/Fortrade.International";
+
+    public String insURL = "https://www.instagram.com/fortrade_online_trading/?hl=en";
+
+    public String ytURL = "https://www.youtube.com/channel/UCNCrGhrDTEN1Hx_20-kFxwg";
 
     public void enterFirstName(String firstNameData) {
         typeText(firstName, firstNameData, "first name");
@@ -262,7 +271,7 @@ public class FortradeRPage extends BasePage {
         }
     }
 
-    public void clickOnSelectedLink(By element, String url) {
+    public void clickOnSelectedLink(By element, String url,String document) throws IOException, AWTException, InterruptedException {
         WebElement displayedElement = returnDisplayedElement(element);
         if (displayedElement != null) {
             clickElement(displayedElement, "link " + displayedElement.getText());
@@ -272,11 +281,17 @@ public class FortradeRPage extends BasePage {
         List<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
         assertURL(url);
+        Thread.sleep(2000);
+        takeScreenshot(document +" document - FortradeR");
         driver.close();
         driver.switchTo().window(tabs.get(0));
     }
 
     public void rightClickOnSelectedLink(By element, String url) {
         performRightClick(returnDisplayedElement(element), url, "link" + returnDisplayedElement(element).getText());
+    }
+
+    public void loginRedirection() throws IOException, AWTException {
+        clickElement(driver.findElement(alreadyHaveAnAccountLinkBy),"An already have account?");
     }
 }

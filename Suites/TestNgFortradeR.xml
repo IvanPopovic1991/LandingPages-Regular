@@ -5,11 +5,19 @@
         <listener class-name="listeners.ScreenshotListener"/>
         <listener class-name="listeners.Transform"/>
     </listeners>
-    <test name="Demo Account Registration">
+    <test name="Social media links redirection- FortradeR">
         <classes>
             <class name="TestsFortradeR.EducationLp">
                 <methods>
-                    <include name="links"/>
+                    <include name="privacyPolicyTest"/>
+                    <include name="termsAndConditionsTest"/>
+                    <include name="howToUnsubscribeTest"/>
+                    <include name="loginRedirectionTest"/>
+                    <include name="fbLinkRedirection"/>
+                    <include name="insLinkRedirection"/>
+                    <include name="ytLinkRedirection"/>
+                    <include name="footerPrivacyPolicy"/>
+                    <include name="fscRegulationTest"/>
                 </methods>
             </class>
         </classes>
