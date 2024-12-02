@@ -130,7 +130,6 @@ public class EducationLp extends BaseTestFortradeR {
                 "Privacy policy");
         fortradeRPage.rightClickOnSelectedLink(fortradeRPage.privacyPolicyLinkBy, fortradeRPage.privacyPolicyFSC);
     }
-
     @Test
     public void termsAndConditionsTest() throws IOException, AWTException, InterruptedException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
@@ -192,7 +191,34 @@ public class EducationLp extends BaseTestFortradeR {
     @Test
     public void ytLinkRedirection() throws IOException, InterruptedException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
-        fortradeRPage.clickOnSelectedLink(fortradeRPage.youtubeLinkBy,fortradeRPage.ytURL,"Youtube page");
-        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.youtubeLinkBy,fortradeRPage.ytURL);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.youtubeLinkBy, fortradeRPage.ytURL, "Youtube page");
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.youtubeLinkBy, fortradeRPage.ytURL);
+    }
+    @Test
+    public void contactUsLink() throws IOException, AWTException{
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnMailLink("contactUs");
+        fortradeRPage.takeScreenshot("FortradeR - contact us redirection");
+        fortradeRPage.closeOutlook();
+        fortradeRPage.rightClickOnMailLink("contactUs");
+        fortradeRPage.closeOutlook();
+    }
+    @Test
+    public void infoLink() throws IOException, AWTException{
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnMailLink("info");
+        fortradeRPage.takeScreenshot("FortradeR - info redirection");
+        fortradeRPage.closeOutlook();
+        fortradeRPage.rightClickOnMailLink("info");
+        fortradeRPage.closeOutlook();
+    }
+    @Test
+    public void supportLink() throws IOException, AWTException{
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnMailLink("support");
+        fortradeRPage.takeScreenshot("FortradeR - support redirection");
+        fortradeRPage.closeOutlook();
+        fortradeRPage.rightClickOnMailLink("support");
+        fortradeRPage.closeOutlook();
     }
 }

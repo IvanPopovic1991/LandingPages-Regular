@@ -12,8 +12,10 @@ import org.testng.Assert;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -269,6 +271,31 @@ public class BasePage {
             System.out.println("Right click on " + log);
         }
     }
+    public void performRightClickForMailLink(WebElement element, String log) {
+        try {
+            // Wait for the element to be visible and clickable
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+
+            // Perform a right-click (context click) on the element
+            Actions actions = new Actions(driver);
+            actions.contextClick(element).perform();
+
+            System.out.println("Right-clicked on " + log);
+        } catch (StaleElementReferenceException e) {
+            // Handle stale element reference by re-locating the element if necessary
+            System.out.println("Encountered StaleElementReferenceException. Retrying...");
+            WebDriverWait wait = new WebDriverWait(driver, waitTime);
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+
+            Actions actions = new Actions(driver);
+            actions.contextClick(element).perform();
+
+            System.out.println("Right-clicked on " + log + " after retrying.");
+        }
+    }
     /*
     returnDisplayedElement method accept By parameter and list all By locators and store them into WebElement
     elements. Checks all elements and return that element which is displayed on the page. If first time fails to find
@@ -294,5 +321,38 @@ public class BasePage {
             }
         }
         return null; // Return null if not found after retries
+    }
+    public boolean isOutlookRunning() {
+        try {
+            // Use ProcessBuilder to run the "tasklist" command
+            ProcessBuilder processBuilder = new ProcessBuilder(List.of("tasklist"));
+            Process process = processBuilder.start();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("HxOutlook.exe")) {
+                    return true;  // Outlook process is running
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;  // Outlook is not running
+    }
+    public void closeOutlook() {
+        if (isOutlookRunning()) {
+            try {
+                // Use ProcessBuilder to run the "taskkill" command to close Outlook
+                ProcessBuilder processBuilder = new ProcessBuilder(List.of("taskkill", "/F", "/IM", "HxOutlook.exe"));
+                processBuilder.start();
+                System.out.println("Outlook has been closed.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Outlook is not running.");
+        }
     }
 }
