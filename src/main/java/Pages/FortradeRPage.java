@@ -55,7 +55,7 @@ public class FortradeRPage extends BasePage {
     public By termsAndConditionsLinkBy = By.xpath("//div[@class='form-wrapper']//a[contains(text(), 'Terms and Conditions')]");
     public By clickHereLinkBy = By.xpath("//div[@class='MarketingMaterials2']//a[text()='click here']");
     public By alreadyHaveAnAccountLinkBy = By.xpath("//*[@class='alreadyHaveAcc']//a[contains(text(), 'Already have an account?')]");
-    public By contactUsLinkBy = By.xpath("//*[@class='needHelp']//a[text()='Contact Us']");
+    public By contactUsLinkBy = By.xpath("//*[@class='needHelp']//a[contains(text(), 'Contact Us')]");
 
     public By facebookLinkBy = By.xpath("//a[@class='facebook-links']");
     public By instagramLinkBy = By.xpath("//a[@href='https://www.instagram.com/fortrade_online_trading/?hl=en']");
@@ -285,6 +285,26 @@ public class FortradeRPage extends BasePage {
         takeScreenshot(document +" document - FortradeR");
         driver.close();
         driver.switchTo().window(tabs.get(0));
+    }
+    public void clickOnMailLink(String mailLink){
+        if (mailLink.equalsIgnoreCase("contactUs")){
+            clickElementBy(contactUsLinkBy, "contact us link");
+        } else if (mailLink.equalsIgnoreCase("info")){
+            clickElementBy(infoLinkBy, "info link");
+        } else if (mailLink.equalsIgnoreCase("support")){
+            clickElementBy(supportLinkBy, "support link");
+        }
+        Assert.assertTrue(isOutlookRunning());
+    }
+    public void rightClickOnMailLink(String mailLink){
+        if (mailLink.equalsIgnoreCase("contactUs")){
+            performRightClickForMailLink(driver.findElement(contactUsLinkBy), "contact us link");
+        } else if (mailLink.equalsIgnoreCase("info")){
+            performRightClickForMailLink(driver.findElement(infoLinkBy), "info link");
+        } else if (mailLink.equalsIgnoreCase("support")){
+            performRightClickForMailLink(driver.findElement(supportLinkBy), "support link");
+        }
+        Assert.assertTrue(isOutlookRunning());
     }
 
     public void rightClickOnSelectedLink(By element, String url) {

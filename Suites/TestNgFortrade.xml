@@ -68,7 +68,7 @@
                 </class>
             </classes>
         </test>
-    <test name="Already have an account link redirection - Iiroc Regulation">
+    <test name="Demo Account Registration - Iiroc Regulation">
         <parameter name="regulation" value="iiroc"/>
         <parameter name="tag" value="?tg=skip&amp;G_GEO=9077369&amp;regulation=IIROC"/>
         <parameter name="countryCode" value="1"/>
@@ -82,6 +82,7 @@
                     <include name="fbLinkRedirection"/>
                     <include name="insLinkRedirection"/>
                     <include name="ytLinkRedirection"/>
+                    <include name="privacyPolicyTest"/>
                 </methods>
             </class>
         </classes>

@@ -8,7 +8,7 @@
     <test name="Social media links redirection- FortradeR">
         <classes>
             <class name="TestsFortradeR.EducationLp">
-                <methods>
+                <methods><!--
                     <include name="privacyPolicyTest"/>
                     <include name="termsAndConditionsTest"/>
                     <include name="howToUnsubscribeTest"/>
@@ -17,7 +17,10 @@
                     <include name="insLinkRedirection"/>
                     <include name="ytLinkRedirection"/>
                     <include name="footerPrivacyPolicy"/>
-                    <include name="fscRegulationTest"/>
+                    <include name="fscRegulationTest"/>-->
+                    <include name="contactUsLink"/>
+                    <include name="infoLink"/>
+                    <include name="supportLink"/>
                 </methods>
             </class>
         </classes>

@@ -2,6 +2,7 @@ package TestsFortrade;
 
 import Pages.CrmPage;
 import Pages.FortradePage;
+import Pages.FortradeRPage;
 import Pages.Mailinator;
 import faker.TestData;
 import org.openqa.selenium.By;
@@ -329,5 +330,21 @@ public class EducationLp extends BaseTestFortrade {
         fortradePage.clickDenyBtn();
         fortradePage.clickOnSelectedLink(fortradePage.youtubeLinkBy,fortradePage.ytURL,"Instagram page",regulation);
         fortradePage.rightClickOnSelectedLink(fortradePage.youtubeLinkBy,fortradePage.ytURL);
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void contactUsLink(String regulation) throws IOException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnMailLink("contactUs");
+        fortradeRPage.takeScreenshot("Fortrade " + regulation + " - contact us redirection");
+        fortradeRPage.closeOutlook();
+    }
+    @Test
+    @Parameters({"regulation"})
+    public void supportLink(String regulation) throws IOException, AWTException {
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.clickOnMailLink("support");
+        fortradeRPage.takeScreenshot("Fortrade " + regulation + " - support redirection");
+        fortradeRPage.closeOutlook();
     }
 }

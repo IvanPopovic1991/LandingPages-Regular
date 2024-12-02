@@ -1,6 +1,7 @@
 package Pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -85,13 +86,12 @@ public class FortradePage extends BasePage {
     public By termsAndConditionsLinkBy = By.xpath("//div[@class='form-wrapper']//a[contains(text(), 'Terms and Conditions')]");
     public By clickHereLink = By.xpath("//div[@class='MarketingMaterials2']//a[text()='click here']");
     public By alreadyHaveAnAccountLinkBy = By.xpath("//*[@class='alreadyHaveAcc']//a[contains(text(), 'Already have an account?')]");
-    public By contactUsLinkBy = By.xpath("//*[@class='needHelp']//a[text()='Contact Us']");
+    public By contactUsLinkBy = By.xpath("//*[@class='needHelp']//a[contains(text(), 'Contact Us')]");
 
     public By facebookLinkBy = By.xpath("//a[@class='facebook-links']");
     public By instagramLinkBy = By.xpath("//a[@href='https://www.instagram.com/fortrade_online_trading/?hl=en']");
     public By youtubeLinkBy = By.xpath("//a[@href='https://www.youtube.com/channel/UCNCrGhrDTEN1Hx_20-kFxwg']");
 
-    public By infoLinkBy = By.xpath("//div[@class='col-md-12 text-center']//a[text()='info@fortrade.com']");
     public By supportLinkBy = By.xpath("//a[text()='support@fortrade.com']");
     public By footerRiskWarningLinkBy = By.xpath("//div[@class='footerRiskDisclaimer']//a[contains(text(), 'Risk warning')]");
     public By footerPrivacyPolicyLinkBy = By.xpath("//div[@class='footerRiskDisclaimer']//a[contains(text(), 'Privacy policy')]");
@@ -501,6 +501,15 @@ public class FortradePage extends BasePage {
         assertURL(url);
         Thread.sleep(2000);
         takeScreenshot(document +" document - " + regulation + " regulation");
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        /*if (!regulation.equalsIgnoreCase("FSC")){
+*//*
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//body/embed[@original-url='https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Privacy_Policy.pdf']")));
+*//*
+            Assert.assertTrue(readAttribute(driver.findElement(By.xpath("//body/embed[@original-url='https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Privacy_Policy.pdf']")), "original-url", "attribute url").equals("https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Privacy_Policy.pdf"));
+        }*/
+        System.out.println("This is the title of the page: " + driver.getTitle());
+        takeScreenshot("Privacy Policy document - " + regulation + " regulation");
         driver.close();
         driver.switchTo().window(tabs.get(0));
     }
@@ -512,5 +521,13 @@ public class FortradePage extends BasePage {
     public void loginRedirection(String regulation) throws IOException, AWTException {
         clickElement(driver.findElement(alreadyHaveAnAccountLinkBy),"Already have an account?");
         //takeScreenshot("Login widget - " + regulation + " regulation");
+    }
+    public void clickOnMailLink(String mailLink){
+        if (mailLink.equalsIgnoreCase("contactUs")){
+            clickElementBy(contactUsLinkBy, "contact us link");
+        } else if (mailLink.equalsIgnoreCase("support")){
+            clickElementBy(supportLinkBy, "support link");
+        }
+        Assert.assertTrue(isOutlookRunning());
     }
 }
