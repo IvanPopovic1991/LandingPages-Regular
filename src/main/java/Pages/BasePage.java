@@ -323,6 +323,23 @@ public class BasePage {
         return null; // Return null if not found after retries
     }
     public boolean isOutlookRunning() {
+        /*try {
+            // Use ProcessBuilder to run the "tasklist" command
+            ProcessBuilder processBuilder = new ProcessBuilder(List.of("tasklist"));
+            Process process = processBuilder.start();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("OUTLOOK.EXE")) {
+                    return true;  // Outlook process is running
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;  // Outlook is not running*/
         try {
             // Use ProcessBuilder to run the "tasklist" command
             ProcessBuilder processBuilder = new ProcessBuilder(List.of("tasklist"));
@@ -332,7 +349,8 @@ public class BasePage {
 
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.contains("HxOutlook.exe")) {
+                // Ensure case-insensitive check and trim whitespace
+                if (line.trim().toUpperCase().contains("OUTLOOK.EXE")) {
                     return true;  // Outlook process is running
                 }
             }
@@ -345,7 +363,7 @@ public class BasePage {
         if (isOutlookRunning()) {
             try {
                 // Use ProcessBuilder to run the "taskkill" command to close Outlook
-                ProcessBuilder processBuilder = new ProcessBuilder(List.of("taskkill", "/F", "/IM", "HxOutlook.exe"));
+                ProcessBuilder processBuilder = new ProcessBuilder(List.of("taskkill", "/F", "/IM", "OUTLOOK.EXE"));
                 processBuilder.start();
                 System.out.println("Outlook has been closed.");
             } catch (Exception e) {

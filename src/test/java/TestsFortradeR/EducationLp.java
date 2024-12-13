@@ -15,9 +15,6 @@ import java.io.IOException;
 
 
 public class EducationLp extends BaseTestFortradeR {
-    String email = TestData.emailGenerator();
-    String phoneNumber = TestData.phoneNumberGenerator();
-    String registeredEmail = email;
 
     @BeforeMethod
     public void setUp() {
@@ -42,6 +39,8 @@ public class EducationLp extends BaseTestFortradeR {
 
     @Test
     public void demoAccountRegistration() throws IOException, AWTException {
+        String email = TestData.emailGenerator();
+        String phoneNumber = TestData.phoneNumberGenerator();
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.successfullyRegistration("Testq", "Testa", email, "381", phoneNumber);
         fortradeRPage.assertURL("https://ready.fortrade.com/#chartticket");
@@ -69,19 +68,24 @@ public class EducationLp extends BaseTestFortradeR {
 
     @Test
     public void alreadyRegisteredAccountTest() throws IOException, AWTException {
-        demoAccountRegistration();
-        driver.get("https://www.fortrader.com/minilps/en/education/");
+        String email = TestData.emailGenerator();
+        String phoneNumber = TestData.phoneNumberGenerator();
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.successfullyRegistration("Testq", "Testa", email, "381", phoneNumber);
+        driver.get("https://www.fortrader.com/minilps/en/education/");
         fortradeRPage.alreadyRegisteredAccount("Testq", "Testa", email, "381", phoneNumber);
         fortradeRPage.assertPopUpForAlreadyRegisteredAccount("Already registered account - FortradeR - pop-up");
     }
 
     @Test
     public void checkingTagsInTheCrm() throws IOException, AWTException {
+        String email = TestData.emailGenerator();
+        String phoneNumber = TestData.phoneNumberGenerator();
         driver.get("https://www.fortrader.com/minilps/en/education/?tg=ivanA1389&tag1=ivanB@1389&tag2=ivanL1389&tag3=" +
                 "ivanM1389&gid=ivanC@1389&G_GEO=ivanD1389&G_GEOint=ivanE1389&G_Device=ivanF1389&G_DeviceModel=ivanG1389&G_" +
                 "AdPos=ivanH1389&g_Track=ivanI1389&Track=ivanj1389&gclid=ivanK1389");
-        demoAccountRegistration();
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.successfullyRegistration("Testq", "Testa", email, "381", phoneNumber);
         String urlCrm = System.getenv("URLForCrm");
         String usernameCrm = System.getenv("UsernameForCrm");
         String passwordCrm = System.getenv("PasswordForCrm");
@@ -103,26 +107,34 @@ public class EducationLp extends BaseTestFortradeR {
         fortradeRPage.assertSameNameErrorMsgs();
         fortradeRPage.takeScreenshot("Error messages for the same first and last name - FortradeR");
     }
+
     @Test
     public void checkingForLogoClickability() throws IOException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.checkLogoClickability("https://www.fortrader.com/minilps/en/education/");
         fortradeRPage.takeScreenshot("Logo is not clickable - FortradeR");
     }
+
     @Test
     public void checkForCountryCodeErrorMessage() throws IOException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.checkCountryCodeErrorMessage("01852833kdkd");
         fortradeRPage.takeScreenshot("Country code error message - FortradeR");
     }
+
     @Test
-    public void emailIsReceivedSuccessfully() throws IOException, AWTException{
+    public void emailIsReceivedSuccessfully() throws IOException, AWTException {
+        String email = TestData.emailGenerator();
+        String phoneNumber = TestData.phoneNumberGenerator();
+        FortradeRPage fortradeRPage = new FortradeRPage(driver);
+        fortradeRPage.successfullyRegistration("Testq", "Testa", email, "381", phoneNumber);
         driver.get("https://www.mailinator.com/");
         Mailinator mailinator = new Mailinator(driver);
-        mailinator.findEmail(registeredEmail);
+        mailinator.findEmail(email);
         mailinator.zoomOutMethod();
-        mailinator.takeScreenshot("Email is received successfully - FortradeR",mailinator.emailTitle);
+        mailinator.takeScreenshot("Email is received successfully - FortradeR", mailinator.emailTitle);
     }
+
     @Test
     public void privacyPolicyTest() throws IOException, AWTException, InterruptedException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
@@ -130,18 +142,19 @@ public class EducationLp extends BaseTestFortradeR {
                 "Privacy policy");
         fortradeRPage.rightClickOnSelectedLink(fortradeRPage.privacyPolicyLinkBy, fortradeRPage.privacyPolicyFSC);
     }
+
     @Test
     public void termsAndConditionsTest() throws IOException, AWTException, InterruptedException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
-        fortradeRPage.clickOnSelectedLink(fortradeRPage.termsAndConditionsLinkBy,fortradeRPage.termsAndConditionsFSC,
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.termsAndConditionsLinkBy, fortradeRPage.termsAndConditionsFSC,
                 "Terms and conditions");
-        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.termsAndConditionsLinkBy,fortradeRPage.termsAndConditionsFSC);
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.termsAndConditionsLinkBy, fortradeRPage.termsAndConditionsFSC);
     }
 
     @Test
     public void howToUnsubscribeTest() throws IOException, AWTException, InterruptedException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
-        fortradeRPage.clickOnSelectedLink(fortradeRPage.clickHereLinkBy,fortradeRPage.howToUnsubscribeURL,
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.clickHereLinkBy, fortradeRPage.howToUnsubscribeURL,
                 "How to unsubscribe");
         fortradeRPage.rightClickOnSelectedLink(fortradeRPage.clickHereLinkBy, fortradeRPage.howToUnsubscribeURL);
     }
@@ -150,9 +163,9 @@ public class EducationLp extends BaseTestFortradeR {
     public void loginRedirectionTest() throws IOException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.loginRedirection();
-        if(driver.getCurrentUrl().contains(fortradeRPage.alrHaveAccount)){
-            fortradeRPage.takeScreenshot("Login page - the user is successfully redirected",fortradeRPage.loginToFortrade);
-        }else{
+        if (driver.getCurrentUrl().contains(fortradeRPage.alrHaveAccount)) {
+            fortradeRPage.takeScreenshot("Login page - the user is successfully redirected", fortradeRPage.loginToFortrade);
+        } else {
             System.out.println("Wrong link redirection");
         }
     }
@@ -162,63 +175,66 @@ public class EducationLp extends BaseTestFortradeR {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.scrollToAnElement(driver.findElement(By.xpath("//div[@class='fscClass']//a[contains" +
                 "(text(), 'Privacy policy')]")));
-        fortradeRPage.clickOnSelectedLink(fortradeRPage.footerPrivacyPolicyLinkBy,fortradeRPage.privacyPolicyFSCFooter,
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.footerPrivacyPolicyLinkBy, fortradeRPage.privacyPolicyFSCFooter,
                 "Privacy policy footer - FortradeR");
-        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.footerPrivacyPolicyLinkBy,fortradeRPage.privacyPolicyFSCFooter);
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.footerPrivacyPolicyLinkBy, fortradeRPage.privacyPolicyFSCFooter);
     }
+
     @Test
     public void fscRegulationTest() throws IOException, InterruptedException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.scrollToAnElement(driver.findElement(By.xpath("//a[text()=' GB21026472']")));
-        fortradeRPage.clickOnSelectedLink(fortradeRPage.fscRegulationLinkBy,fortradeRPage.fscLink,
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.fscRegulationLinkBy, fortradeRPage.fscLink,
                 "Financial Services Commission page");
         fortradeRPage.scrollToAnElement(driver.findElement(By.xpath("//a[text()=' GB21026472']")));
-        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.fscRegulationLinkBy,fortradeRPage.fscLink);
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.fscRegulationLinkBy, fortradeRPage.fscLink);
     }
 
     @Test
     public void fbLinkRedirection() throws IOException, InterruptedException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
-        fortradeRPage.clickOnSelectedLink(fortradeRPage.facebookLinkBy,fortradeRPage.fbURL,"Facebook page");
-        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.facebookLinkBy,fortradeRPage.fbURL);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.facebookLinkBy, fortradeRPage.fbURL, "Facebook page");
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.facebookLinkBy, fortradeRPage.fbURL);
     }
+
     @Test
     public void insLinkRedirection() throws IOException, InterruptedException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
-        fortradeRPage.clickOnSelectedLink(fortradeRPage.instagramLinkBy,fortradeRPage.insURL,"Instagram page");
-        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.instagramLinkBy,fortradeRPage.insURL);
+        fortradeRPage.clickOnSelectedLink(fortradeRPage.instagramLinkBy, fortradeRPage.insURL, "Instagram page");
+        fortradeRPage.rightClickOnSelectedLink(fortradeRPage.instagramLinkBy, fortradeRPage.insURL);
     }
+
     @Test
     public void ytLinkRedirection() throws IOException, InterruptedException, AWTException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.clickOnSelectedLink(fortradeRPage.youtubeLinkBy, fortradeRPage.ytURL, "Youtube page");
         fortradeRPage.rightClickOnSelectedLink(fortradeRPage.youtubeLinkBy, fortradeRPage.ytURL);
     }
+
     @Test
-    public void contactUsLink() throws IOException, AWTException{
+    public void contactUsLink() throws IOException, AWTException, InterruptedException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.clickOnMailLink("contactUs");
+        Thread.sleep(1000);
         fortradeRPage.takeScreenshot("FortradeR - contact us redirection");
         fortradeRPage.closeOutlook();
-        fortradeRPage.rightClickOnMailLink("contactUs");
-        fortradeRPage.closeOutlook();
     }
+
     @Test
-    public void infoLink() throws IOException, AWTException{
+    public void infoLink() throws IOException, AWTException, InterruptedException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.clickOnMailLink("info");
+        Thread.sleep(1000);
         fortradeRPage.takeScreenshot("FortradeR - info redirection");
         fortradeRPage.closeOutlook();
-        fortradeRPage.rightClickOnMailLink("info");
-        fortradeRPage.closeOutlook();
     }
+
     @Test
-    public void supportLink() throws IOException, AWTException{
+    public void supportLink() throws IOException, AWTException, InterruptedException {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.clickOnMailLink("support");
+        Thread.sleep(1000);
         fortradeRPage.takeScreenshot("FortradeR - support redirection");
-        fortradeRPage.closeOutlook();
-        fortradeRPage.rightClickOnMailLink("support");
         fortradeRPage.closeOutlook();
     }
 }

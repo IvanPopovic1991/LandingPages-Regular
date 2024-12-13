@@ -1,7 +1,6 @@
 package Pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -522,12 +521,20 @@ public class FortradePage extends BasePage {
         clickElement(driver.findElement(alreadyHaveAnAccountLinkBy),"Already have an account?");
         //takeScreenshot("Login widget - " + regulation + " regulation");
     }
-    public void clickOnMailLink(String mailLink){
+/*    public void clickOnMailLink(String mailLink){
         if (mailLink.equalsIgnoreCase("contactUs")){
             clickElementBy(contactUsLinkBy, "contact us link");
         } else if (mailLink.equalsIgnoreCase("support")){
             clickElementBy(supportLinkBy, "support link");
         }
         Assert.assertTrue(isOutlookRunning());
+    }*/
+public void clickOnMailLink(String mailLink){
+    if (mailLink.equalsIgnoreCase("contactUs")){
+        clickElement(returnDisplayedElement(contactUsLinkBy), "contact us link");
+    } else if (mailLink.equalsIgnoreCase("support")){
+        clickElement(returnDisplayedElement(supportLinkBy), "support link");
     }
+    Assert.assertTrue(isOutlookRunning());
+}
 }
