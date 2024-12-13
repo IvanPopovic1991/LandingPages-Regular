@@ -5,7 +5,7 @@ import org.testng.ITestResult;
 
 public class RetryAnalyzer implements IRetryAnalyzer {
     private int count = 0;
-    private int maxCount = 2;
+    private int maxCount = 1;
 
     /**
      * Ova metoda prati test koji je pokrenut, i ako je pao (nije uspesan) ponavlja ga onoliko puta koliko maxCount

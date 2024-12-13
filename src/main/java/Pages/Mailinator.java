@@ -38,7 +38,7 @@ public class Mailinator extends BasePage{
     public void findEmail(String emailValue){
         typeText(search,emailValue,"search input");
         clickElement(goBtn,"go button");
-        WebDriverWait wait = new WebDriverWait(driver,10);
+        WebDriverWait wait = new WebDriverWait(driver,15);
         wait.until(ExpectedConditions.visibilityOf(emailMessage));
         wait.until(ExpectedConditions.elementToBeClickable(emailMessage));
         clickElement(emailMessage,"received message in mailbox");
