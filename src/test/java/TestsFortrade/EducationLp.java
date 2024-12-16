@@ -77,13 +77,13 @@ public class EducationLp extends BaseTestFortrade {
     }
 
     @Test
-    @Parameters({"countryCode", "regulation"})
-    public void alreadyRegisteredAccountTest(String countryCode, String regulation) throws IOException, AWTException {
+    @Parameters({"countryCode", "regulation","tag"})
+    public void alreadyRegisteredAccountTest(String countryCode, String regulation,String tag) throws IOException, AWTException {
         String email = TestData.emailGenerator();
         String phoneNumber = TestData.phoneNumberGenerator();
         FortradePage fortradePage = new FortradePage(driver);
         fortradePage.successfullyRegistration("Testq", "Testa", email, countryCode, phoneNumber);
-        driver.get("https://www.fortrade.com/minilps/en/education/");
+        driver.get("https://www.fortrade.com/minilps/en/education/"+tag);
         fortradePage.alreadyRegisteredAccount("Testq", "Testa", email, countryCode, phoneNumber);
         fortradePage.assertPopUpForAlreadyRegisteredAccount("Already registered account - pop-up " + regulation);
     }
@@ -359,7 +359,7 @@ public class EducationLp extends BaseTestFortrade {
     public void ytLinkRedirection(String regulation) throws IOException, InterruptedException, AWTException {
         FortradePage fortradePage = new FortradePage(driver);
         fortradePage.clickDenyBtn();
-        fortradePage.clickOnSelectedLink(fortradePage.youtubeLinkBy, fortradePage.ytURL, "Instagram page", regulation);
+        fortradePage.clickOnSelectedLink(fortradePage.youtubeLinkBy, fortradePage.ytURL, "Youtube page", regulation);
         fortradePage.rightClickOnSelectedLink(fortradePage.youtubeLinkBy, fortradePage.ytURL);
     }
 

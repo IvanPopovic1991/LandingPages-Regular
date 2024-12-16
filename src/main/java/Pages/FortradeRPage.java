@@ -51,6 +51,9 @@ public class FortradeRPage extends BasePage {
     @FindBy(xpath = "//div[contains(text(),'Login')]")
     public WebElement loginToFortrade;
 
+    @FindBy(xpath = "//div[@data-cmd='menu']")
+    public WebElement menuBtn;
+
     public By privacyPolicyLinkBy = By.xpath("//div[@class='form-wrapper']//a[text()='Privacy Policy']");
     public By termsAndConditionsLinkBy = By.xpath("//div[@class='form-wrapper']//a[contains(text(), 'Terms and Conditions')]");
     public By clickHereLinkBy = By.xpath("//div[@class='MarketingMaterials2']//a[text()='click here']");
@@ -128,6 +131,10 @@ public class FortradeRPage extends BasePage {
 
     public void clickOnSubmitButton() {
         clickElement(submitButton, "get started button");
+    }
+
+    public void clickMenuBtn(){
+        clickElement(menuBtn,"menu button");
     }
 
     public void successfullyRegistration(String firstNameData, String lastNameData, String emailData, String countryCodeData, String phoneNumberData) {

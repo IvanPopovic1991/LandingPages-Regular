@@ -508,7 +508,7 @@ public class FortradePage extends BasePage {
             Assert.assertTrue(readAttribute(driver.findElement(By.xpath("//body/embed[@original-url='https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Privacy_Policy.pdf']")), "original-url", "attribute url").equals("https://www.fortrade.com/wp-content/uploads/legal/Fortrade_Privacy_Policy.pdf"));
         }*/
         System.out.println("This is the title of the page: " + driver.getTitle());
-        takeScreenshot("Privacy Policy document - " + regulation + " regulation");
+        //takeScreenshot("Privacy Policy document - " + regulation + " regulation");
         driver.close();
         driver.switchTo().window(tabs.get(0));
     }
