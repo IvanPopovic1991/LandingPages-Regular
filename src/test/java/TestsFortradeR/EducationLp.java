@@ -44,6 +44,7 @@ public class EducationLp extends BaseTestFortradeR {
         FortradeRPage fortradeRPage = new FortradeRPage(driver);
         fortradeRPage.successfullyRegistration("Testq", "Testa", email, "381", phoneNumber);
         fortradeRPage.assertURL("https://ready.fortrade.com/#chartticket");
+        fortradeRPage.clickMenuBtn();
         fortradeRPage.takeScreenshot("Demo account registration - FortradeR");
     }
 
