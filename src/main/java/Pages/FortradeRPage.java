@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -21,10 +20,10 @@ public class FortradeRPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "FirstName")
+    @FindBy(xpath = "//input[@id='FirstName']")
     public WebElement firstName;
 
-    @FindBy(id = "LastName")
+    @FindBy(xpath = "//input[@id='LastName']")
     public WebElement lastName;
 
     @FindBy(xpath = "(//div[@class='LcWidgetTopWrapper ClField-Email lcFieldWrapper']//input[@name='Email'])[position()=2]")
@@ -33,10 +32,10 @@ public class FortradeRPage extends BasePage {
     @FindBy(xpath = "//input[@name='PhoneCountryCode']")
     public WebElement countryCode;
 
-    @FindBy(xpath = "//div[@class='phoneWrapper']//input[@placeholder='Phone']")
+    @FindBy(xpath = "//input[@placeholder='Number']")
     public WebElement phoneNumber;
 
-    @FindBy(xpath = "//input[@class='Send-Button']")
+    @FindBy(xpath = "//input[contains(@class,'Send-Button')]")
     public WebElement submitButton;
 
     @FindBy(xpath = "//div[@class='userExistsLabelInner']")
@@ -45,7 +44,7 @@ public class FortradeRPage extends BasePage {
     @FindBy(xpath = "(//div[@class='errorValidationIn'])[last()]")
     public WebElement countryCodeErrorMessage;
 
-    @FindBy(xpath = "//header/a/div[@class='logo']")
+    @FindBy(xpath = "//div[@class='logo']")
     public WebElement fortradeLogo;
 
     @FindBy(xpath = "//div[contains(text(),'Login')]")
@@ -54,26 +53,35 @@ public class FortradeRPage extends BasePage {
     @FindBy(xpath = "//div[@data-cmd='menu']")
     public WebElement menuBtn;
 
-    public By privacyPolicyLinkBy = By.xpath("//div[@class='form-wrapper']//a[text()='Privacy Policy']");
-    public By termsAndConditionsLinkBy = By.xpath("//div[@class='form-wrapper']//a[contains(text(), 'Terms and Conditions')]");
-    public By clickHereLinkBy = By.xpath("//div[@class='MarketingMaterials2']//a[text()='click here']");
+    @FindBy(xpath = "//button[@class='heroBtn']")
+    public WebElement startBtn;
+
+    public By privacyPolicyLinkBy = By.xpath("//div[@class='fscClass']//a[text()='Privacy Policy']");
+
+    public By termsAndConditionsLinkBy = By.xpath("//div[@class='fscClass']//a[contains(text(), 'Terms and Conditions')]");
+
+    public By clickHereLinkBy = By.xpath("(//a[text()='click here'])[2]");
+
     public By alreadyHaveAnAccountLinkBy = By.xpath("//*[@class='alreadyHaveAcc']//a[contains(text(), 'Already have an account?')]");
+
     public By contactUsLinkBy = By.xpath("//*[@class='needHelp']//a[contains(text(), 'Contact Us')]");
 
     public By facebookLinkBy = By.xpath("//a[@class='facebook-links']");
+
     public By instagramLinkBy = By.xpath("//a[@href='https://www.instagram.com/fortrade_online_trading/?hl=en']");
+
     public By youtubeLinkBy = By.xpath("//a[@href='https://www.youtube.com/channel/UCNCrGhrDTEN1Hx_20-kFxwg']");
 
     public By infoLinkBy = By.xpath("//div[@class='col-md-12 text-center']//a[text()='info@fortrade.com']");
+
     public By supportLinkBy = By.xpath("//a[text()='support@fortrade.com']");
+
     public By footerRiskWarningLinkBy = By.xpath("//div[@class='footerRiskDisclaimer']//a[contains(text(), 'Risk warning')]");
+
     public By footerPrivacyPolicyLinkBy = By.xpath("//div[@class='fscClass']//a[contains(text(),'Privacy policy')]");
+
     public By footerPrivacyPolicyFortradeRLinkBy = By.xpath("//div[@class='fscClass']//a[contains(text(), 'Privacy policy')]");
 
-    public By fcaRegulationLinkBy = By.xpath("//a[text()='FRN: 609970']");
-    public By ciroRegulationLinkBy = By.xpath("//a[text()='CRN: BC1148613']");
-    public By asicRegulationLinkBy = By.xpath("//a[text()='ABN: 33 614 683 831 | AFSL: 493520']");
-    public By cysecRegulationLinkBy = By.xpath("//a[text()='CIF license number 385/20']");
     public By fscRegulationLinkBy = By.xpath("//a[text()=' GB21026472']");
 
 
@@ -293,6 +301,7 @@ public class FortradeRPage extends BasePage {
         driver.close();
         driver.switchTo().window(tabs.get(0));
     }
+
     public void clickOnMailLink(String mailLink){
         if (mailLink.equalsIgnoreCase("contactUs")){
             clickElementBy(contactUsLinkBy, "contact us link");
@@ -303,6 +312,7 @@ public class FortradeRPage extends BasePage {
         }
         Assert.assertTrue(isOutlookRunning());
     }
+
     public void rightClickOnMailLink(String mailLink){
         if (mailLink.equalsIgnoreCase("contactUs")){
             performRightClickForMailLink(driver.findElement(contactUsLinkBy), "contact us link");
@@ -320,5 +330,10 @@ public class FortradeRPage extends BasePage {
 
     public void loginRedirection() throws IOException, AWTException {
         clickElement(driver.findElement(alreadyHaveAnAccountLinkBy),"An already have account?");
+    }
+
+    public void clickStartBtn()
+    {
+        clickElement(startBtn,"Start button");
     }
 }
