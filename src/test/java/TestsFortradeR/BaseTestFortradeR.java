@@ -11,7 +11,7 @@ public class BaseTestFortradeR {
     public void baseSetup(String browser, String version) {
         driverManager = DriverManagerFactory.getDriverManager(browser);
         driver = driverManager.getWebDriver(version);
-        driver.get("https://www.fortrader.com/minilps/en/forex-steps/");
+        driver.get("https://www.fortrader.com/minilps/en/stocks-steps/");
     }
 
     public void baseTearDown(){
