@@ -7,7 +7,7 @@
     </listeners>
     <test name="All test cases- FortradeR">
         <classes>
-            <class name="TestsFortradeR.Forex_steps"/>
+            <class name="TestsFortradeR.stoks_Steps_Lp"/>
         </classes>
     </test>
 </suite>

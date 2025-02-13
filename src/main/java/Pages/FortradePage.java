@@ -82,27 +82,41 @@ public class FortradePage extends BasePage {
     public WebElement loginToFotrade;
 
     public By privacyPolicyLinkBy = By.xpath("//div[@class='form-wrapper']//a[text()='Privacy Policy']");
+
     public By termsAndConditionsLinkBy = By.xpath("//div[@class='form-wrapper']//a[contains(text(), 'Terms and Conditions')]");
+
     public By clickHereLink = By.xpath("//div[@class='MarketingMaterials2']//a[text()='click here']");
+
     public By alreadyHaveAnAccountLinkBy = By.xpath("//*[@class='alreadyHaveAcc']//a[contains(text(), 'Already have an account?')]");
+
     public By contactUsLinkBy = By.xpath("//*[@class='needHelp']//a[contains(text(), 'Contact Us')]");
 
     public By facebookLinkBy = By.xpath("//a[@class='facebook-links']");
+
     public By instagramLinkBy = By.xpath("//a[@href='https://www.instagram.com/fortrade_online_trading/?hl=en']");
+
     public By youtubeLinkBy = By.xpath("//a[@href='https://www.youtube.com/channel/UCNCrGhrDTEN1Hx_20-kFxwg']");
 
     public By supportLinkBy = By.xpath("//a[text()='support@fortrade.com']");
+
     public By footerRiskWarningLinkBy = By.xpath("//div[@class='footerRiskDisclaimer']//a[contains(text(), 'Risk warning')]");
+
     public By footerPrivacyPolicyLinkBy = By.xpath("//div[@class='footerRiskDisclaimer']//a[contains(text(), 'Privacy policy')]");
 
     public By fcaRegulationLinkBy = By.xpath("//a[text()='FRN: 609970']");
+
     public By ciroRegulationLinkBy = By.xpath("//a[text()='CRN: BC1148613']");
+
     public By asicRegulationLinkBy = By.xpath("//a[text()='ABN: 33 614 683 831 | AFSL: 493520']");
+
     public By cysecRegulationLinkBy = By.xpath("//a[text()='CIF license number 385/20']");
+
     public By fscRegulationLinkBy = By.xpath("//a[text()=' GB21026472']");
 
     public By fsgDocument = By.xpath("//div[@class='footerRiskDisclaimer']//div[@class='asicClass']//a[contains(text(),'(FSG)')]");
+
     public By pdsDocument = By.xpath("//div[@class='footerRiskDisclaimer']//div[@class='asicClass']//a[contains(text(),'(PDS)')]");
+
     public By tmdDocument = By.xpath("//div[@class='footerRiskDisclaimer']//div[@class='asicClass']//a[contains(text(),'(TMD)')]");
 
     String[] errorMessages = {"Please enter all your given first name(s)",

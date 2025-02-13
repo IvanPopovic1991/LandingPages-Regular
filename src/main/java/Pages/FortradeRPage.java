@@ -53,8 +53,17 @@ public class FortradeRPage extends BasePage {
     @FindBy(xpath = "//div[@data-cmd='menu']")
     public WebElement menuBtn;
 
+    @FindBy(xpath = "//div[@id='platformRegulation']")
+    public WebElement regulationMsg;
+
     @FindBy(xpath = "//button[@class='heroBtn']")
     public WebElement startBtn;
+
+    @FindBy(xpath = "//button[@id='CybotCookiebotDialogBodyButtonDecline']")
+    public WebElement denyBtn;
+
+    @FindBy(xpath = "//div[@class='exitButton']")
+    public WebElement iAmNotSerResBtn;
 
     public By privacyPolicyLinkBy = By.xpath("//div[@class='fscClass']//a[text()='Privacy Policy']");
 
@@ -109,7 +118,7 @@ public class FortradeRPage extends BasePage {
     public String privacyPolicyFSCFooter = "https://www.fortrade.com/wp-content/uploads/legal/FSC/Fortrade_MA_Privacy_Policy.pdf";
 
     // Financial Services Commission, Mauritius (FSC) link
-    public String fscLink = "https://www.fscmauritius.org/en/supervision/register-of-licensees/register-of-licensees-details?licence_no=GB21026472&key=&cat=_GB&code=";
+    public String fscLink = "https://opr.fscmauritius.org/ords/opr/r/fsc-opr/fsc-online-public-register-opr";
 
     public String fbURL = "https://www.facebook.com/Fortrade.International";
 
@@ -335,5 +344,20 @@ public class FortradeRPage extends BasePage {
     public void clickStartBtn()
     {
         clickElement(startBtn,"Start button");
+    }
+
+    public void clickDenyBtn() {
+        clickElement(denyBtn, "deny cookies button");
+    }
+
+    public void clickIAmNotSerBtn(){
+        clickElement(iAmNotSerResBtn,"I am not Serbian resident text");
+    }
+
+    public void checkRegulation() {
+        if(regulationMsg.isDisplayed()) {
+            String actualText = getText(regulationMsg, "regulation text");
+            Assert.assertEquals(actualText, "Broker: Fortrade (Mauritius) Ltd (FSC)");
+        }
     }
 }
